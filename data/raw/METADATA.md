@@ -79,6 +79,18 @@ Data Features:
 # Datasets about Flight Routes
 
 ## faa_routes_db.csv
+Data Features:
+
+    Origin: 3-5 character departure airport designator. No 'K' prefix for US.
+    Destination: 3-5 character arrival airport designator. No 'K' prefix for US.
+    Route Type: L(low altitude), H(high alt), LSD(low alt single direction), HSD(high alt single dir), SLD(special low alt directional), HLD, TEC(tower enroute control).
+    Area: Area description.
+    Aircraft Types: Aircraft allowed/limitations description.
+    Altitude: Altitude description.
+    Route String: All or any part of the route string.
+    Direction: Route direction limitations description.
+    Departure ARTCC: 3 character center code.
+    Arrival ARTCC: 3 character center code.
 
 ## routes.csv
 Data Features:
