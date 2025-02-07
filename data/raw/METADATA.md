@@ -1,3 +1,5 @@
+# Datasets about Flight Prices
+
 ## Clean_Dataset.csv
 This dataset was made by combining business.csv and economy.csv and cleaning up the features 
 Data Features: 
@@ -74,7 +76,20 @@ Data Features:
     Geocoded_City2: Geocoded coordinates for the destination city
     tbl1apk: Unique identifier for the route
 
+# Datasets about Flight Routes
+
 ## faa_routes_db.csv
 
 ## routes.csv
+Data Features:
 
+    airline: 2-letter (IATA) or 3-letter (ICAO) code of the airline.
+    airline ID: Unique OpenFlights identifier for airline (see Airline).
+    source airport: 3-letter (IATA) or 4-letter (ICAO) code of the source airport.
+    source airport ID: Unique OpenFlights identifier for source airport (see Airport)
+    destination airport: 3-letter (IATA) or 4-letter (ICAO) code of the destination airport.
+    destination airport ID: Unique OpenFlights identifier for destination airport (see Airport)
+    codeshare: "Y" if this flight is a codeshare (that is, not operated by Airline, but another carrier), empty otherwise.
+    stops: Number of stops on this flight ("0" for direct)
+    equipment: 3-letter codes for plane type(s) generally used on this flight, separated by spaces
+    [The special value \N is used for "NULL" to indicate that no value is available.]
