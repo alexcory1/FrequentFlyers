@@ -1,6 +1,6 @@
 # Frequent Flyers
 
-<description>
+This project is to create a data dashboard that provides insights about flight prices and routes.
 
   
 ## Team Members
