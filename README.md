@@ -1,6 +1,6 @@
 # Frequent Flyers
 
-This project is to create a data dashboard that provides insights about flight prices and routes.
+This repository supports the development of a data dashboard for analyzing flight trends. The project will leverage data science techniques to provide insights about flight pricing and routes. By integrating various data sources, it aims to enhance decision making for travelers through interactive visuals and predictivev analytics.
 
   
 ## Team Members
@@ -11,4 +11,5 @@ This project is to create a data dashboard that provides insights about flight p
 * Snehal Arla (Snehal232003)
 
 ## Folders
-* Data - contains subfolder for raw data, will contain the final, cleaned dataset
+* data/ - The central location for all data-related files. Currently contains a subfolder for raw data, and will contain the final, cleaned dataset
+    * data/raw/ - Stores unprocessed or original datasets before any cleaning
