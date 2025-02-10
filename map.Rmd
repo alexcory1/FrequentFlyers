@@ -1,4 +1,4 @@
-```{r}
+```{r, include=FALSE}
 library(ggplot2)
 library(dplyr)
 library(maps)
@@ -7,16 +7,16 @@ library(lubridate)
 ```
 
 
-```{r}
+```{r, echo=FALSE}
 US_Airline_Flight <- read.csv("~/rstudio/FrequentFlyers/data/raw/US_Airline_Flight.csv", header=TRUE)
-head(US_Airline_Flight)
+
 geocode_tags <- read.csv("~/rstudio/FrequentFlyers/data/raw/airport-codes-geocoded.csv", sep=";")
-head(geocode_tags)
+
 geous <- geocode_tags[geocode_tags$Country.Code == "US", ]
-geous
+
 ```
 
-```{r}
+```{r, echo=FALSE}
 US_Airline_Flight <- US_Airline_Flight %>%
   left_join(geous, by = c("airport_1" = "Airport.Code")) %>%
   rename(start_lat = Latitude, start_long = Longitude)
@@ -24,14 +24,12 @@ US_Airline_Flight <- US_Airline_Flight %>%
 US_Airline_Flight <- US_Airline_Flight %>%
   left_join(geous, by = c("airport_2" = "Airport.Code")) %>%
     rename(end_lat = Latitude, end_long = Longitude)
-
-head(US_Airline_Flight)
 ```
 
 
-```{r}
+```{r, echo=FALSE}
 
-last_year_flights <- US_Airline_Flight[US_Airline_Flight$Year == 2024, ]
+last_year_flights <- US_Airline_Flight[US_Airline_Flight$Year == 2024 | US_Airline_Flight$Year == 2023, ]
 
 flight_map_data <- last_year_flights %>%
   select(start_lat, start_long, end_lat, end_long) %>%
