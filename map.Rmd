@@ -1,0 +1,56 @@
+```{r}
+library(ggplot2)
+library(dplyr)
+library(maps)
+library(leaflet)
+library(lubridate)
+```
+
+
+```{r}
+US_Airline_Flight <- read.csv("~/rstudio/FrequentFlyers/data/raw/US_Airline_Flight.csv", header=TRUE)
+head(US_Airline_Flight)
+geocode_tags <- read.csv("~/rstudio/FrequentFlyers/data/raw/airport-codes-geocoded.csv", sep=";")
+head(geocode_tags)
+geous <- geocode_tags[geocode_tags$Country.Code == "US", ]
+geous
+```
+
+```{r}
+US_Airline_Flight <- US_Airline_Flight %>%
+  left_join(geous, by = c("airport_1" = "Airport.Code")) %>%
+  rename(start_lat = Latitude, start_long = Longitude)
+
+US_Airline_Flight <- US_Airline_Flight %>%
+  left_join(geous, by = c("airport_2" = "Airport.Code")) %>%
+    rename(end_lat = Latitude, end_long = Longitude)
+
+head(US_Airline_Flight)
+```
+
+
+```{r}
+
+last_year_flights <- US_Airline_Flight[US_Airline_Flight$Year == 2024, ]
+
+flight_map_data <- last_year_flights %>%
+  select(start_lat, start_long, end_lat, end_long) %>%
+  na.omit()
+
+
+leaflet() %>%
+  addTiles() %>%  # Adds a default OpenStreetMap tile layer
+  addPolylines(data = flight_map_data, 
+               lng = ~c(start_long, end_long), 
+               lat = ~c(start_lat, end_lat), 
+               color = "blue", weight = 1, opacity = 0.5) %>%
+  addCircleMarkers(data = flight_map_data, 
+                   lng = ~start_long, lat = ~start_lat, 
+                   color = "red", radius = 3, label = ~paste("Start: (", start_lat, ",", start_long, ")")) %>%
+  addCircleMarkers(data = flight_map_data, 
+                   lng = ~end_long, lat = ~end_lat, 
+                   color = "green", radius = 3, label = ~paste("End: (", end_lat, ",", end_long, ")")) %>%
+  addLegend("bottomright", colors = c("red", "green", "blue"), 
+            labels = c("Start Airport", "End Airport", "Flight Path"), title = "Legend")
+```
+
