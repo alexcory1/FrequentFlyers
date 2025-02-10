@@ -1,0 +1,10 @@
+name: frequentflyers
+title:
+username: amcory
+account: amcory
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13957162
+bundleId: 9777563
+url: https://amcory.shinyapps.io/frequentflyers/
+version: 1
