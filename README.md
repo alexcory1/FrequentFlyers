@@ -13,3 +13,4 @@ This repository supports the development of a data dashboard for analyzing fligh
 ## Folders
 * data/ - The central location for all data-related files. Currently contains a subfolder for raw data, and will contain the final, cleaned dataset
     * data/raw/ - Stores unprocessed or original datasets before any cleaning
+* frequentflyers/ - Location for hosting web application 
