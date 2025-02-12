@@ -9,38 +9,10 @@
 
 library(ggplot2)
 library(dplyr)
-library(maps)
 library(leaflet)
 library(lubridate)
 library(rsconnect)
 library(shiny)
-
-
-US_Airline_Flight <- read.csv("../data/raw/US_Airline_Flight.csv", header=TRUE)
-geocode_tags <- read.csv("../data/raw/airport-codes-geocoded.csv", sep=";")
-geous <- geocode_tags[geocode_tags$Country.Code == "US", ]
-
-US_Airline_Flight <- US_Airline_Flight %>%
-  left_join(geous, by = c("airport_1" = "Airport.Code")) %>%
-  rename(start_lat = Latitude, start_long = Longitude)
-
-US_Airline_Flight <- US_Airline_Flight %>%
-  left_join(geous, by = c("airport_2" = "Airport.Code")) %>%
-  rename(end_lat = Latitude, end_long = Longitude)
-
-flight_year <- c(2024:2022)
-
-filter_year <- function(flight_year) {
-  filtered_years <- US_Airline_Flight[US_Airline_Flight$Year == flight_year, ]
-  return(filtered_years)
-}
-
-filtered_years <- filter_year(flight_year)
-
-flight_map_data <- filtered_years %>%
-  select(start_lat, start_long, end_lat, end_long) %>%
-  na.omit()
-
 
 
 ui <- fluidPage(
@@ -54,6 +26,9 @@ ui <- fluidPage(
       h2("US Flight Map")
   ),
   #br(), br(),
+
+  #textInput("flight_year", label = "Year", value = c(2024:2022), width = NULL, placeholder = NULL)
+
   leafletOutput("map", height="900px"),
 
 )
@@ -61,8 +36,14 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
 
+    source("filter_year.R")
 
+    flight_year <- c(2024)
+    filtered_years <- filter_year(flight_year)
 
+    flight_map_data <- filtered_years %>%
+      select(start_lat, start_long, end_lat, end_long) %>%
+      na.omit()
 
     leaflet() %>%
       addTiles() %>%
