@@ -27,9 +27,14 @@ ui <- fluidPage(
   ),
   #br(), br(),
 
-  #textInput("flight_year", label = "Year", value = c(2024:2022), width = NULL, placeholder = NULL)
-
-  leafletOutput("map", height="900px"),
+  sliderInput("flight_year",
+              label = "Select Year Range",
+              min = 2013,
+              max = 2024,
+              value = c(2023, 2024),
+              step = 1,
+              sep = ""),
+  leafletOutput("map", height="700px"),
 
 )
 
@@ -38,8 +43,8 @@ server <- function(input, output, session) {
 
     source("filter_year.R")
 
-    flight_year <- c(2024)
-    filtered_years <- filter_year(flight_year)
+    #flight_year <- c(2024)
+    filtered_years <- filter_year(input$flight_year)
 
     flight_map_data <- filtered_years %>%
       select(start_lat, start_long, end_lat, end_long) %>%
