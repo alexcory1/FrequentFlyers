@@ -14,5 +14,12 @@ filter_year <- function(flight_year) {
 
 
     filtered_years <- US_Airline_Flight[US_Airline_Flight$Year == flight_year, ]
-  return(filtered_years)
+
+
+    flight_map_data <- filtered_years %>%
+      select(start_lat, start_long, end_lat, end_long) %>%
+      na.omit()
+
+
+  return(flight_map_data)
 }

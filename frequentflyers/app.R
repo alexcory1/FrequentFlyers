@@ -13,6 +13,7 @@ library(leaflet)
 library(lubridate)
 library(rsconnect)
 library(shiny)
+source("filter_year.R")
 
 
 ui <- fluidPage(
@@ -25,7 +26,6 @@ ui <- fluidPage(
       h1("Frequent Flyers", style = "margin: 0;"),
       h2("US Flight Map")
   ),
-  #br(), br(),
 
   sliderInput("flight_year",
               label = "Select Year Range",
@@ -41,14 +41,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
 
-    source("filter_year.R")
-
-    #flight_year <- c(2024)
-    filtered_years <- filter_year(input$flight_year)
-
-    flight_map_data <- filtered_years %>%
-      select(start_lat, start_long, end_lat, end_long) %>%
-      na.omit()
+    flight_map_data <- filter_year(input$flight_year)
 
     leaflet() %>%
       addTiles() %>%
