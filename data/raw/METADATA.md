@@ -105,3 +105,8 @@ Data Features:
     stops: Number of stops on this flight ("0" for direct)
     equipment: 3-letter codes for plane type(s) generally used on this flight, separated by spaces
     [The special value \N is used for "NULL" to indicate that no value is available.]
+    
+## airport-codes-geocoded.csv
+```
+Used for joining airport codes onto US_Airline_Flight.csv
+```
