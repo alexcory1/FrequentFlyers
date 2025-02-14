@@ -34,28 +34,49 @@ ui <- fluidPage(
               value = c(2023, 2024),
               step = 1,
               sep = ""),
+
+  textInput("airport_id",
+            label = "Enter Airport Code: "),
+
+
   leafletOutput("map", height="700px"),
 
 )
 
 server <- function(input, output, session) {
-  output$map <- renderLeaflet({
 
-    flight_map_data <- filter_year(input$flight_year)
-    View(flight_map_data)
+
+  flight_data <- reactive({
+    filter_year(input$flight_year)
+  })
+
+  filtered_data <- reactive({
+    if (input$airport_id == "") {
+      flight_data()  #Defaults to displaying all airports when no text in box
+    } else {
+      flight_data() %>%
+        filter(airport_1 == input$airport_id | airport_2 == input$airport_id)
+    }
+  })
+
+
+  output$map <- renderLeaflet({
+    req(nrow(filtered_data()) > 0)
+    #flight_map_data <- filter_year(input$flight_year)
+    #View(flight_map_data)
 
     leaflet() %>%
       addTiles() %>%
-      addPolylines(data = flight_map_data,
+      addPolylines(data = filtered_data(),
                    lng = ~c(start_long, end_long),
                    lat = ~c(start_lat, end_lat),
                    color = "blue", weight = 1, opacity = 0.5) %>%
-      addCircleMarkers(data = flight_map_data,
+      addCircleMarkers(data = filtered_data(),
                        lng = ~start_long, lat = ~start_lat,
-                       color = "red", radius = 3, label = flight_map_data$airport_1) %>%
-      addCircleMarkers(data = flight_map_data,
+                       color = "red", radius = 3, label = ~airport_1) %>%
+      addCircleMarkers(data = filtered_data(),
                        lng = ~end_long, lat = ~end_lat,
-                       color = "green", radius = 3, label = flight_map_data$airport_2) %>%
+                       color = "green", radius = 3, label = ~airport_2) %>%
       addLegend("bottomright", colors = c("red", "green", "blue"),
                 labels = c("Start Airport", "End Airport", "Flight Path"), title = "Legend")
   })
