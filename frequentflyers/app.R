@@ -42,6 +42,7 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
 
     flight_map_data <- filter_year(input$flight_year)
+    View(flight_map_data)
 
     leaflet() %>%
       addTiles() %>%
@@ -51,10 +52,10 @@ server <- function(input, output, session) {
                    color = "blue", weight = 1, opacity = 0.5) %>%
       addCircleMarkers(data = flight_map_data,
                        lng = ~start_long, lat = ~start_lat,
-                       color = "red", radius = 3, label = ~paste("Start: (", start_lat, ",", start_long, ")")) %>%
+                       color = "red", radius = 3, label = flight_map_data$airport_1) %>%
       addCircleMarkers(data = flight_map_data,
                        lng = ~end_long, lat = ~end_lat,
-                       color = "green", radius = 3, label = ~paste("End: (", end_lat, ",", end_long, ")")) %>%
+                       color = "green", radius = 3, label = flight_map_data$airport_2) %>%
       addLegend("bottomright", colors = c("red", "green", "blue"),
                 labels = c("Start Airport", "End Airport", "Flight Path"), title = "Legend")
   })

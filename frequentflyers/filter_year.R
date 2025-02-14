@@ -17,7 +17,7 @@ filter_year <- function(flight_year) {
 
 
     flight_map_data <- filtered_years %>%
-      select(start_lat, start_long, end_lat, end_long) %>%
+#      select(start_lat, start_long, end_lat, end_long) %>%
       na.omit()
 
 
