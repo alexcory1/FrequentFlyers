@@ -14,6 +14,7 @@ library(lubridate)
 library(rsconnect)
 library(shiny)
 source("filter_year.R")
+source("compute_flight_counts.R")
 
 
 ui <- fluidPage(
@@ -61,23 +62,26 @@ server <- function(input, output, session) {
 
 
   output$map <- renderLeaflet({
-    req(nrow(filtered_data()) > 0)
+    flight_map_data <- compute_flight_counts(filtered_data())
+
     #flight_map_data <- filter_year(input$flight_year)
     #View(flight_map_data)
 
     leaflet() %>%
       addTiles() %>%
-      addPolylines(data = filtered_data(),
+      addPolylines(data = flight_map_data,
                    lng = ~c(start_long, end_long),
                    lat = ~c(start_lat, end_lat),
-                   color = "blue", weight = 1, opacity = 0.5) %>%
-      addCircleMarkers(data = filtered_data(),
+                   color = "blue", weight = 1, opacity = 0.2) %>%
+      addCircleMarkers(data = flight_map_data,
                        lng = ~start_long, lat = ~start_lat,
-                       color = "red", radius = 3, label = ~airport_1) %>%
-      addCircleMarkers(data = filtered_data(),
+                       color = "green", label = ~airport_1,
+                       radius = ~log(start_flight_count)) %>%
+      addCircleMarkers(data = flight_map_data,
                        lng = ~end_long, lat = ~end_lat,
-                       color = "green", radius = 3, label = ~airport_2) %>%
-      addLegend("bottomright", colors = c("red", "green", "blue"),
+                       color = "red", label = ~airport_2,
+                       radius = ~log(end_flight_count)) %>%
+      addLegend("bottomright", colors = c("green", "red", "blue"),
                 labels = c("Start Airport", "End Airport", "Flight Path"), title = "Legend")
   })
 }
