@@ -56,7 +56,7 @@ server <- function(input, output, session) {
       flight_data()  #Defaults to displaying all airports when no text in box
     } else {
       flight_data() %>%
-        filter(airport_1 == input$airport_id | airport_2 == input$airport_id)
+        filter(airport_1 == toupper(input$airport_id) | airport_2 == toupper(input$airport_id))
     }
   })
 
