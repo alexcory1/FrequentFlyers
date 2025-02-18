@@ -16,7 +16,7 @@ We decided to use R for this project over Python due to the package support for 
 
 ![](images/SeaTac_2013.png)
 
-Currently a user is able to hover over an airport and see the airport code. There is a slider that allows the user to view flights in a range of years between 2013-2024. It can also take in user input select just flights in and out of a given airport.
+Currently a user is able to hover over an airport and see the airport code. There is a slider that allows the user to view flights in a range of years between 2013-2024. It can also take user input to filter to flights to show only a given airport.
 
 ### Roadblocks
 
