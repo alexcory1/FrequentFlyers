@@ -40,7 +40,7 @@ ui <- fluidPage(
             label = "Enter Airport Code: "),
 
 
-  leafletOutput("map", height="700px"),
+  leafletOutput("map", height="600px"),
 
 )
 
@@ -75,13 +75,13 @@ server <- function(input, output, session) {
                    color = "blue", weight = 1, opacity = 0.2) %>%
       addCircleMarkers(data = flight_map_data,
                        lng = ~start_long, lat = ~start_lat,
-                       color = "green", label = ~airport_1,
+                       color = "black", label = ~airport_1,
                        radius = ~log(start_flight_count)) %>%
       addCircleMarkers(data = flight_map_data,
                        lng = ~end_long, lat = ~end_lat,
                        color = "red", label = ~airport_2,
                        radius = ~log(end_flight_count)) %>%
-      addLegend("bottomright", colors = c("green", "red", "blue"),
+      addLegend("bottomright", colors = c("black", "red", "blue"),
                 labels = c("Start Airport", "End Airport", "Flight Path"), title = "Legend")
   })
 }
