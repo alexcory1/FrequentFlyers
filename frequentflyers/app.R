@@ -23,7 +23,7 @@ ui <- fluidPage(
       background-color: #AAD3DF;
     }
   ")),
-  div(style = "background-color: #2C3E50; padding: 10px; color: white; text-align: center;",
+  div(style = "background-color: #003249; padding: 10px; color: white; text-align: center;",
       h1("Frequent Flyers", style = "margin: 0;"),
       h2("US Flight Map")
   ),
@@ -44,7 +44,7 @@ ui <- fluidPage(
 
 )
 
-server <- function(input, output, session) {
+server <- function(input, output) {
 
 
   flight_data <- reactive({
@@ -64,8 +64,8 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     flight_map_data <- compute_flight_counts(filtered_data())
 
-    #flight_map_data <- filter_year(input$flight_year)
-    #View(flight_map_data)
+    flight_map_data <- flight_map_data %>%
+      mutate(total_flight_count = start_flight_count + end_flight_count)
 
     leaflet() %>%
       addTiles() %>%
@@ -75,14 +75,14 @@ server <- function(input, output, session) {
                    color = "blue", weight = 1, opacity = 0.2) %>%
       addCircleMarkers(data = flight_map_data,
                        lng = ~start_long, lat = ~start_lat,
-                       color = "black", label = ~airport_1,
-                       radius = ~log(start_flight_count)) %>%
+                       color = "#355834", label = ~airport_1,
+                       radius = ~log(total_flight_count/2)) %>%
       addCircleMarkers(data = flight_map_data,
                        lng = ~end_long, lat = ~end_lat,
-                       color = "red", label = ~airport_2,
-                       radius = ~log(end_flight_count)) %>%
-      addLegend("bottomright", colors = c("black", "red", "blue"),
-                labels = c("Start Airport", "End Airport", "Flight Path"), title = "Legend")
+                       color = "#355834", label = ~airport_2,
+                       radius = ~log(total_flight_count/2)) %>%
+      addLegend("bottomright", colors = c("#355834", "blue"),
+                labels = c("Airport", "Flight Path"), title = "Legend")
   })
 }
 shinyApp(ui = ui, server = server)
