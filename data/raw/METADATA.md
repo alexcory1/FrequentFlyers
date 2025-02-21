@@ -1,52 +1,35 @@
 # Datasets about Flight Prices
 
-## Clean_Dataset.csv
-This dataset was made by combining business.csv and economy.csv and cleaning up the features 
+## itineraries.csv
 Data Features: 
 
-    1) Airline: The name of the airline company is stored in the airline column. It is a categorical feature having 6 different airlines.
-    2) Flight: Flight stores information regarding the plane's flight code. It is a categorical feature.
-    3) Source City: City from which the flight takes off. It is a categorical feature having 6 unique cities.
-    4) Departure Time: This is a derived categorical feature obtained created by grouping time periods into bins. It stores information about the departure time and have 6 unique time labels.
-    5) Stops: A categorical feature with 3 distinct values that stores the number of stops between the source and destination cities.
-    6) Arrival Time: This is a derived categorical feature created by grouping time intervals into bins. It has six distinct time labels and keeps information about the arrival time.
-    7) Destination City: City where the flight will land. It is a categorical feature having 6 unique cities.
-    8) Class: A categorical feature that contains information on seat class; it has two distinct values: Business and Economy.
-    9) Duration: A continuous feature that displays the overall amount of time it takes to travel between cities in hours.
-    10)Days Left: This is a derived characteristic that is calculated by subtracting the trip date by the booking date.
-    11) Price: Target variable stores information of the ticket price
-
-
-## business.csv
-Data Features: 
-
-    1) date: Date of Travel. It is a DateTime feature from February 11 - March 31, 2022 
-    2) Airline: The name of the airline company is stored in the airline column. It is a categorical feature having 6 different airlines.
-    3) ch_code: Flight Character Code. It is a categorical feature with 2 unique values: UK, AI 
-    4) num_code: Flight Numerical Code. Stores information regarding the plane's flight code. It is a categorical feature. 
-    5) dep_time: Departure Time. This is a DateTime feature with a timestamp. 
-    6) from: Source City. City from which the flight takes off. It is a categorical feature having 6 unique cities.
-    7) time_taken: Duration of Flight. A continuous feature that displays the overall amount of time it takes to travel between cities in hours. Stored as a string. 
-    8) stop: Stops. A categorical feature with 5 distinct values that stores the number of stops between the source and destination cities.
-    9) arr_time: Arrival Time. This is a DateTime feature with a timestamp. 
-    10) Destination City: City where the flight will land. It is a categorical feature having 5 unique cities.
-    12) price: Ticket Price. Target variable stores information of the ticket price
-
-
-## economy.csv
-Data Features: 
-
-    1) date: Date of Travel. It is a DateTime feature from February 11 - March 31, 2022 
-    2) Airline: The name of the airline company is stored in the airline column. It is a categorical feature having 6 different airlines.
-    3) ch_code: Flight Character Code. It is a categorical feature with 2 unique values: UK, AI 
-    4) num_code: Flight Numerical Code. Stores information regarding the plane's flight code. It is a categorical feature. 
-    5) dep_time: Departure Time. This is a DateTime feature with a timestamp. 
-    6) from: Source City. City from which the flight takes off. It is a categorical feature having 6 unique cities.
-    7) time_taken: Duration of Flight. A continuous feature that displays the overall amount of time it takes to travel between cities in hours. Stored as a string. 
-    8) stop: Stops. A categorical feature with 5 distinct values that stores the number of stops between the source and destination cities.
-    9) arr_time: Arrival Time. This is a DateTime feature with a timestamp. 
-    10) Destination City: City where the flight will land. It is a categorical feature having 5 unique cities.
-    12) price: Ticket Price. Target variable stores information of the ticket price
+    legId: An identifier for the flight.
+    searchDate: The date (YYYY-MM-DD) on which this entry was taken from Expedia.
+    flightDate: The date (YYYY-MM-DD) of the flight.
+    startingAirport: Three-character IATA airport code for the initial location.
+    destinationAirport: Three-character IATA airport code for the arrival location.
+    fareBasisCode: The fare basis code.
+    travelDuration: The travel duration in hours and minutes.
+    elapsedDays: The number of elapsed days (usually 0).
+    isBasicEconomy: Boolean for whether the ticket is for basic economy.
+    isRefundable: Boolean for whether the ticket is refundable.
+    isNonStop: Boolean for whether the flight is non-stop.
+    baseFare: The price of the ticket (in USD).
+    totalFare: The price of the ticket (in USD) including taxes and other fees.
+    seatsRemaining: Integer for the number of seats remaining.
+    totalTravelDistance: The total travel distance in miles. This data is sometimes missing.
+    segmentsDepartureTimeEpochSeconds: String containing the departure time (Unix time) for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsDepartureTimeRaw: String containing the departure time (ISO 8601 format: YYYY-MM-DDThh:mm:ss.000±[hh]:00) for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsArrivalTimeEpochSeconds: String containing the arrival time (Unix time) for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsArrivalTimeRaw: String containing the arrival time (ISO 8601 format: YYYY-MM-DDThh:mm:ss.000±[hh]:00) for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsArrivalAirportCode: String containing the IATA airport code for the arrival location for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsDepartureAirportCode: String containing the IATA airport code for the departure location for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsAirlineName: String containing the name of the airline that services each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsAirlineCode: String containing the two-letter airline code that services each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsEquipmentDescription: String containing the type of airplane used for each leg of the trip (e.g. "Airbus A321" or "Boeing 737-800"). The entries for each of the legs are separated by '||'.
+    segmentsDurationInSeconds: String containing the duration of the flight (in seconds) for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsDistance: String containing the distance traveled (in miles) for each leg of the trip. The entries for each of the legs are separated by '||'.
+    segmentsCabinCode: String containing the cabin for each leg of the trip (e.g. "coach"). The entries for each of the legs are separated by '||'.
 
 
 ## US_Airline_flight.csv
