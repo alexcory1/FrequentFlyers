@@ -67,22 +67,34 @@ server <- function(input, output) {
     flight_map_data <- flight_map_data %>%
       mutate(total_flight_count = start_flight_count + end_flight_count)
 
+    unique_airports <- flight_map_data %>%
+      select(airport_1, start_long, start_lat, total_flight_count) %>%
+      rename(airport = airport_1, long = start_long, lat = start_lat) %>%
+      bind_rows(
+        flight_map_data %>%
+          select(airport_2, end_long, end_lat, total_flight_count) %>%
+          rename(airport = airport_2, long = end_long, lat = end_lat)
+      ) %>%
+      group_by(airport, long, lat) %>%
+      summarise(total_flight_count = sum(total_flight_count), .groups = "drop")
+
     leaflet() %>%
       addTiles() %>%
       addPolylines(data = flight_map_data,
                    lng = ~c(start_long, end_long),
                    lat = ~c(start_lat, end_lat),
                    color = "blue", weight = 1, opacity = 0.2) %>%
-      addCircleMarkers(data = flight_map_data,
-                       lng = ~start_long, lat = ~start_lat,
-                       color = "#355834", label = ~airport_1,
-                       radius = ~log(total_flight_count/2)) %>%
-      addCircleMarkers(data = flight_map_data,
-                       lng = ~end_long, lat = ~end_lat,
-                       color = "#355834", label = ~airport_2,
-                       radius = ~log(total_flight_count/2)) %>%
+      addCircleMarkers(data = unique_airports,
+                       lng = ~long, lat = ~lat,
+                       color = "#355834",
+                       fillColor = "#355834",
+                       fillOpacity = 1,
+                       opacity = 1,
+                       label = ~airport,
+                       radius = ~log(total_flight_count)/1.5) %>%
       addLegend("bottomright", colors = c("#355834", "blue"),
                 labels = c("Airport", "Flight Path"), title = "Legend")
+
   })
 }
 shinyApp(ui = ui, server = server)
