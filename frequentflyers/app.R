@@ -3,6 +3,7 @@ library(shinydashboard)
 library(leaflet)
 library(dplyr)
 library(lubridate)
+library(rsconnect)
 
 source("filter_year.R")
 source("compute_flight_counts.R")
@@ -59,8 +60,16 @@ ui <- dashboardPage(
                          <a href='https://www.linkedin.com/in/snehal-arla-1a1346261/' target='_blank'>Snehal Arla</a>."))
               ),
             ),
-      tabItem(tabName = "plots", h2("Flight Data Summary")),
-      tabItem(tabName = "about", h2("About This Application"))
+      tabItem(tabName = "plots",
+              h2("Flight Data Summary"),
+
+              ),
+      tabItem(tabName = "about",
+              h2("About Frequent Flyers"),
+              p("This project was created as our data science capstone project.
+                The end goal of this project is to create a product for frequent flyers to make educated decisions
+                about flying.")
+              )
     )
   )
 )
@@ -70,10 +79,15 @@ server <- function(input, output, session) {
   flight_data <- reactive({ filter_year(input$flight_year) })
 
   filtered_data <- reactive({
+    flight_data <- flight_data()
+
+    flight_data <- flight_data %>%
+      filter(airport_1 != "PBG" & airport_2 != "PBG")
+
     if (input$airport_id == "") {
-      flight_data()
+      flight_data
     } else {
-      flight_data() %>%
+      flight_data %>%
         filter(airport_1 == toupper(input$airport_id) | airport_2 == toupper(input$airport_id))
     }
   })
