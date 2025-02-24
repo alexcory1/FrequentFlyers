@@ -26,6 +26,7 @@ ui <- dashboardPage(
       menuItem("Home", tabName = "home", icon = icon("home")),
       menuItem("Map", tabName = "map", icon = icon("map")),
       menuItem("Plots", tabName = "plots", icon = icon("plane")),
+      menuItem("Price Prediction", tabName = "pricePrediction", icon = icon("dollar-sign")),
       menuItem("About", tabName = "about", icon = icon("info-circle"))
     )
   ),
@@ -64,6 +65,10 @@ ui <- dashboardPage(
               h2("Flight Data Summary"),
 
               ),
+      tabItem(tabName = "pricePrediction",
+              h2("Future Flight Prices Analysis"),
+              
+      ),
       tabItem(tabName = "about",
               h2("About Frequent Flyers"),
               p("This project was created as our data science capstone project.
