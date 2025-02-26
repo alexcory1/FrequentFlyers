@@ -9,6 +9,7 @@ library(rsconnect)
 #Split into multiple R scripts for readability and collaboration 
 source("filter_year.R")
 source("compute_flight_counts.R")
+source("plots.R")
 
 #This is the main UI code These are often split into ui.r and app.r
 #This section is responsible for all UI elements
@@ -73,6 +74,9 @@ ui <- dashboardPage(
             ),
       tabItem(tabName = "plots",
               h2("Flight Data Summary"),
+              fluidRow(
+                box(width = 6, plotOutput("price_plot"))
+              )
 
               ),
       tabItem(tabName = "pricePrediction",
@@ -97,6 +101,11 @@ server <- function(input, output) {
   #This reactively filters the year based on the slider
   #The reactive keyword means this function is called whenever the UI element is interacted with
   flight_data <- reactive({ filter_year(input$flight_year) })
+  
+  # Render histogram for price distribution
+  output$price_plot <- renderPlot({
+    plot_price_distribution(flight_data())
+  })
 
   #I genuinely do not remember what this is here for, I'll look into removing it
   filtered_data <- reactive({
