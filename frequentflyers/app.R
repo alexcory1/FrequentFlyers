@@ -149,8 +149,18 @@ server <- function(input, output) {
     #Actually renders the map
     leaflet() %>%
       addTiles() %>%
-      addPolylines(data = flight_map_data, lng = ~c(start_long, end_long), lat = ~c(start_lat, end_lat), color = "blue", weight = 1, opacity = 0.2) %>%
-      addCircleMarkers(data = unique_airports, lng = ~long, lat = ~lat, color = "#355834", fillColor = "#355834", fillOpacity = 1, opacity = 1, label = ~airport, radius = ~log(total_flight_count)/1.5) %>%
+      addPolylines(data = flight_map_data,
+                   lng = ~c(start_long, end_long),
+                   lat = ~c(start_lat, end_lat),
+                   color = "blue", weight = 1, opacity = 0.2) %>%
+      addCircleMarkers(data = unique_airports,
+                       lng = ~long, lat = ~lat,
+                       color = "#355834",
+                       fillColor = "#355834",
+                       fillOpacity = 1,
+                       opacity = 1,
+                       label = ~airport,
+                       radius = ~log(total_flight_count)/1.5) %>%
       addLegend("bottomright", colors = c("#355834", "blue"), labels = c("Airport", "Flight Path"), title = "Legend")
   })
 }
