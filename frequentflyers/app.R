@@ -21,7 +21,7 @@ ui <- dashboardPage(
                       href = "https://github.com/alexcory1/FrequentFlyers",
                       target = "_blank",
                       icon("github"),
-                      style = "font-size: 30px; padding-top: 10px; padding-right: 10px;"
+                      style = "font-size: 30px; padding-top: 5px; padding-right: 10px;"
                     ),
                     class = "dropdown"
                   )
