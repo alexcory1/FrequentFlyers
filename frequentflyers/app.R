@@ -5,10 +5,15 @@ library(dplyr)
 library(lubridate)
 library(rsconnect)
 
+#This loads in the other functions to be used down the line
+#Split into multiple R scripts for readability and collaboration 
 source("filter_year.R")
 source("compute_flight_counts.R")
 
+#This is the main UI code These are often split into ui.r and app.r
+#This section is responsible for all UI elements
 ui <- dashboardPage(
+  #This is the header that has the name and github link at the top
   dashboardHeader(title = "Frequent Flyers",
                   tags$li(
                     a(
@@ -21,6 +26,7 @@ ui <- dashboardPage(
                   )
                   ),
 
+  #Sidebar - menuItems are the tabs
   dashboardSidebar(
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
@@ -31,6 +37,10 @@ ui <- dashboardPage(
     )
   ),
 
+  #This is the UI for the map page
+  #tabItem takes in the tabName from the menuItem above
+  #tabItem takes in all of the standard shiny code for the page 
+  #To make a new page, simply add a new tabItem that contains the UI elements for said page
   dashboardBody(
     tabItems(
       tabItem(tabName = "map",
@@ -79,17 +89,28 @@ ui <- dashboardPage(
   )
 )
 
-server <- function(input, output, session) {
 
+#This is the backend code.
+#It takes the parameters from the UI
+server <- function(input, output) {
+
+  #This reactively filters the year based on the slider
+  #The reactive keyword means this function is called whenever the UI element is interacted with
   flight_data <- reactive({ filter_year(input$flight_year) })
 
+  #I genuinely do not remember what this is here for, I'll look into removing it
   filtered_data <- reactive({
     flight_data <- flight_data()
 
+    
+    #This removes the airport that is encoded to the wrong latlong making it appear in Kazakhstan
     flight_data <- flight_data %>%
       filter(airport_1 != "PBG" & airport_2 != "PBG")
 
-    if (input$airport_id == "") {
+    #This is the airport id filtering. If the box has fewer than 3 characters it shows all airports, 
+    #Otherwise it only shows flights in and out of the input airport
+    #uses toupper function to allow lowercase airport entries
+    if (length(input$airport_id) < 3) {
       flight_data
     } else {
       flight_data %>%
@@ -97,10 +118,14 @@ server <- function(input, output, session) {
     }
   })
 
+  
   output$map <- renderLeaflet({
+    #This computes the number of flights for the radius of the circle markers
     flight_map_data <- compute_flight_counts(filtered_data()) %>%
       mutate(total_flight_count = start_flight_count + end_flight_count)
 
+    #This gets all of the unique airports so we do not duplicate the circle marker
+    #For every occurrence of each airport in the csv
     unique_airports <- flight_map_data %>%
       select(airport_1, start_long, start_lat, total_flight_count) %>%
       rename(airport = airport_1, long = start_long, lat = start_lat) %>%
@@ -112,6 +137,7 @@ server <- function(input, output, session) {
       group_by(airport, long, lat) %>%
       summarise(total_flight_count = sum(total_flight_count), .groups = "drop")
 
+    #Actually renders the map
     leaflet() %>%
       addTiles() %>%
       addPolylines(data = flight_map_data, lng = ~c(start_long, end_long), lat = ~c(start_lat, end_lat), color = "blue", weight = 1, opacity = 0.2) %>%
