@@ -107,9 +107,9 @@ server <- function(input, output) {
     plot_price_distribution(flight_data())
   })
 
-  #I genuinely do not remember what this is here for, I'll look into removing it
+  #This re-defines the variable when the UI is updated  
   filtered_data <- reactive({
-    flight_data <- flight_data()
+  flight_data <- flight_data()
 
     
     #This removes the airport that is encoded to the wrong latlong making it appear in Kazakhstan
