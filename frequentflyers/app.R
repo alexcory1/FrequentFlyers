@@ -110,7 +110,7 @@ server <- function(input, output) {
     #This is the airport id filtering. If the box has fewer than 3 characters it shows all airports, 
     #Otherwise it only shows flights in and out of the input airport
     #uses toupper function to allow lowercase airport entries
-    if (length(input$airport_id) < 3) {
+    if (nchar(input$airport_id) < 3) {
       flight_data
     } else {
       flight_data %>%
