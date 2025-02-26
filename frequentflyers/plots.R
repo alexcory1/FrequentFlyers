@@ -1,5 +1,8 @@
 library(ggplot2)
 library(dplyr)
+library(plotly)
+library(circlize)
+library(tibble)
 
 # Price distribution of the dataset
 plot_price_distribution <- function(data) {
@@ -8,3 +11,26 @@ plot_price_distribution <- function(data) {
     labs(title = "Flight Fare Distribution", x = "Fare (USD)", y = "Count") +
     theme_minimal()
 }
+
+
+plot_flights_per_quarter <- function(data) {
+  req(data$quarter)  # Ensures the 'quarter' column exists
+  
+  data %>%
+    count(quarter) %>%
+    mutate(quarter = factor(quarter, levels = 1:4, labels = c("Q1", "Q2", "Q3", "Q4"))) %>%
+    plot_ly(x = ~quarter, y = ~n, type = "bar", marker = list(color = "#FF6666")) %>%
+    layout(title = "Total Flights Per Quarter", xaxis = list(title = "Quarter"), 
+           yaxis = list(title = "Total Flights (Log Scale)", type = "log"))
+}
+
+plot_distance_vs_fare <- function(data) {
+  plot_ly(data, x = ~nsmiles, y = ~fare, type = "scatter", mode = "markers",
+          marker = list(color = "green", size = 5, opacity = 0.6)) %>%
+    layout(title = "Fare vs Distance",
+           xaxis = list(title = "Distance (nsmiles)"),
+           yaxis = list(title = "Fare (USD)"))
+}
+
+
+

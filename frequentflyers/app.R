@@ -4,6 +4,9 @@ library(leaflet)
 library(dplyr)
 library(lubridate)
 library(rsconnect)
+library(plotly)
+library(circlize)
+library(tibble)
 
 #This loads in the other functions to be used down the line
 #Split into multiple R scripts for readability and collaboration 
@@ -75,7 +78,11 @@ ui <- dashboardPage(
       tabItem(tabName = "plots",
               h2("Flight Data Summary"),
               fluidRow(
-                box(width = 6, plotOutput("price_plot"))
+                box(width = 6, plotOutput("price_plot")),
+                box(width = 6, plotlyOutput("flights_per_month_plot")),
+                fluidRow(
+                  box(width = 6, plotlyOutput("distance_fare_plot"))  
+                )
               )
 
               ),
@@ -83,6 +90,7 @@ ui <- dashboardPage(
               h2("Future Flight Prices Analysis"),
               
       ),
+
       tabItem(tabName = "about",
               h2("About Frequent Flyers"),
               p("This project was created as our data science capstone project.
@@ -106,6 +114,16 @@ server <- function(input, output) {
   output$price_plot <- renderPlot({
     plot_price_distribution(flight_data())
   })
+  
+  # Render bar chart for total flights per month
+  output$flights_per_month_plot <- renderPlotly({
+    plot_flights_per_quarter(flight_data())
+  })
+  
+  output$distance_fare_plot <- renderPlotly({
+    plot_distance_vs_fare(flight_data())
+  })
+
 
   #This re-defines the variable when the UI is updated  
   filtered_data <- reactive({
