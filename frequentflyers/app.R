@@ -80,9 +80,7 @@ ui <- dashboardPage(
               fluidRow(
                 box(width = 6, plotOutput("price_plot")),
                 box(width = 6, plotlyOutput("flights_per_month_plot")),
-                fluidRow(
-                  box(width = 6, plotlyOutput("distance_fare_plot"))  
-                )
+                box(width = 6, plotlyOutput("distance_fare_plot"))  
               )
 
               ),
