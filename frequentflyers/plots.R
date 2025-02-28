@@ -39,10 +39,10 @@ plot_distance_vs_fare <- function(data) {
   
   # Create the scatter plot with trend line
   plot_ly(data, x = ~nsmiles, y = ~fare, type = "scatter", mode = "markers",
-          marker = list(color = "green", size = 5, opacity = 0.6),
+          marker = list(color = "green", size = 5, opacity = 0.6), name = "Data",
           showlegend = FALSE) %>%
     add_trace(data = trend_line, x = ~nsmiles, y = ~fare, type = "scatter", mode = "lines",
-              line = list(color = "red", width = 2), showlegend = FALSE) %>%
+              line = list(color = "red", width = 3), name = "Trend Line", showlegend = FALSE) %>%
     layout(title = "Fare vs Distance",
            xaxis = list(title = "Distance (nsmiles)"),
            yaxis = list(title = "Fare (USD)"))

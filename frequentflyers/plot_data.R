@@ -13,9 +13,16 @@ load_USflight_data <- function() {
 
 ### Pre-processing data ###
 
-# Preprocess price distribution
+# For price distribution
 price_distribution_data <- function() {
   data <- load_USflight_data()
   price_distribution_data <- data %>% select(fare) %>% na.omit()
   return(price_distribution_data)
+}
+
+# For distance vs fare
+distance_fare_data <- function() {
+  data <- load_USflight_data()
+  distance_fare_data <- data %>% select(nsmiles, fare) %>% na.omit()
+  return(distance_fare_data)
 }
