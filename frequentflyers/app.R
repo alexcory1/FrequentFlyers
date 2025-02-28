@@ -13,6 +13,7 @@ library(tibble)
 source("filter_year.R")
 source("compute_flight_counts.R")
 source("plots.R")
+source("plot_data.R")
 
 #This is the main UI code These are often split into ui.r and app.r
 #This section is responsible for all UI elements
@@ -103,14 +104,10 @@ ui <- dashboardPage(
 #This is the backend code.
 #It takes the parameters from the UI
 server <- function(input, output) {
-
-  #This reactively filters the year based on the slider
-  #The reactive keyword means this function is called whenever the UI element is interacted with
-  flight_data <- reactive({ filter_year(input$flight_year) })
   
   # Render histogram for price distribution
   output$price_plot <- renderPlotly({
-    plot_price_distribution(flight_data())
+    plot_price_distribution(price_distribution_data())
   })
   
   # Render bar chart for total flights per month
@@ -121,7 +118,11 @@ server <- function(input, output) {
   output$distance_fare_plot <- renderPlotly({
     plot_distance_vs_fare(flight_data())
   })
-
+  
+  
+  #This reactively filters the year based on the slider
+  #The reactive keyword means this function is called whenever the UI element is interacted with
+  flight_data <- reactive({ filter_year(input$flight_year) })
 
   #This re-defines the variable when the UI is updated  
   filtered_data <- reactive({
