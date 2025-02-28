@@ -49,5 +49,14 @@ plot_distance_vs_fare <- function(data) {
 }
 
 
+# Group bar chart of flight count by quarters per year
+plot_yearQuarter_count <- function(data) {
+  plot_ly(data, x = ~Year, y = ~flight_count, color = ~quarter, type = "bar") %>% 
+    layout(title = "Total Flights Per Year & Quarter",
+           xaxis = list(title = "Year"),
+           yaxis = list(title = "Total Flights"), 
+           legend = list(title = list(text = "Quarter")))
+}
+
 
 

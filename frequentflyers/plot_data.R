@@ -26,3 +26,13 @@ distance_fare_data <- function() {
   distance_fare_data <- data %>% select(nsmiles, fare) %>% na.omit()
   return(distance_fare_data)
 }
+
+# For flight count by quarters per year
+yearQuarter_count_data <- function() {
+  data <- load_USflight_data()
+  yearQuarter_count_data <- data %>% group_by(Year, quarter) %>% summarise(flight_count = n(), .groups = "drop")
+  
+  yearQuarter_count_data$quarter <- factor(yearQuarter_count_data$quarter, levels = c(1,2,3,4))
+  
+  return(yearQuarter_count_data)
+}
