@@ -79,9 +79,13 @@ ui <- dashboardPage(
       tabItem(tabName = "plots",
               h2("Flight Data Summary"),
               fluidRow(
-                box(width = 6, plotlyOutput("price_plot")),
-                box(width = 6, plotlyOutput("flights_per_month_plot")),
-                box(width = 6, plotlyOutput("distance_fare_plot"))  
+                # 3 plots per row for box width = 4
+                box(width = 4, height = "auto", plotlyOutput("price_plot", width = "100%")),
+                box(width = 4, height = "auto", plotlyOutput("flights_per_month_plot", width = "100%")),
+              ),
+              fluidRow(
+                # 2 plots per row for box width = 6
+                box(height = "auto", plotlyOutput("distance_fare_plot", width = "100%"))  
               )
 
               ),
@@ -116,7 +120,7 @@ server <- function(input, output) {
   })
   
   output$distance_fare_plot <- renderPlotly({
-    plot_distance_vs_fare(flight_data())
+    plot_distance_vs_fare(distance_fare_data())
   })
   
   
