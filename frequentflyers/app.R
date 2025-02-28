@@ -82,11 +82,12 @@ ui <- dashboardPage(
                 # 3 plots per row for box width = 4
                 box(width = 4, height = "auto", plotlyOutput("price_plot", width = "100%")),
                 box(width = 4, height = "auto", plotlyOutput("flights_per_month_plot", width = "100%")),
-                box(width = 4, height = "auto", plotlyOutput("yearQuarter_count_plot", width = "100%"))
+                
               ),
               fluidRow(
                 # 2 plots per row for box width = 6
-                box(height = "auto", plotlyOutput("distance_fare_plot", width = "100%"))  
+                box(height = "auto", plotlyOutput("distance_fare_plot", width = "100%")),
+                box(height = "auto", plotlyOutput("yearQuarter_count_plot", width = "100%"))
               )
 
               ),
@@ -125,7 +126,7 @@ server <- function(input, output) {
     plot_distance_vs_fare(distance_fare_data())
   })
   
-  # Render group bar chart for total flights by quarter per year
+  # Render grouped bar chart for total flights by quarter per year
   output$yearQuarter_count_plot <- renderPlotly({
     plot_yearQuarter_count(yearQuarter_count_data())
   })
