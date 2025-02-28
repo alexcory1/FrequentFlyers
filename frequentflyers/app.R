@@ -78,7 +78,7 @@ ui <- dashboardPage(
       tabItem(tabName = "plots",
               h2("Flight Data Summary"),
               fluidRow(
-                box(width = 6, plotOutput("price_plot")),
+                box(width = 6, plotlyOutput("price_plot")),
                 box(width = 6, plotlyOutput("flights_per_month_plot")),
                 box(width = 6, plotlyOutput("distance_fare_plot"))  
               )
@@ -109,7 +109,7 @@ server <- function(input, output) {
   flight_data <- reactive({ filter_year(input$flight_year) })
   
   # Render histogram for price distribution
-  output$price_plot <- renderPlot({
+  output$price_plot <- renderPlotly({
     plot_price_distribution(flight_data())
   })
   
