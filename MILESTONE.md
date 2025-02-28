@@ -27,3 +27,22 @@ For the modeling part of our dashboard, we found a new dataset that worked bette
 
 ### Project Progress 
 This week we did not make a ton of progress due to being busy with other things. We updated the UI and created a writeup of the features we currently have. We also fixed a bug in the airport filtering causing writing airport codes in lowercase (dsm, sea) to break the map. We also changed some things with the UI to make it slightly cleaner. In the process we broke the log scale for setting the radius of the airports. We think this is because of making the pre-log sum of flights larger, effectively compressing them on the log-scale. Our team is working together well and we are all contributing ideas. In class we discussed deliverables for coming classes.
+
+
+
+## 2025-02-28: Exploratory Analysis Milestone 
+### Brainstorm Dashboard 
+We are using R and R Shiny to create our dashboard that will have 5 tabs. The “Home” tab will show a summary of our dataset and some direct observations. The “Map” tab has an interactive map that displays all the routes and airports in the dataset. There will also be a slider where users can filter for routes from a specific year range. The “Plots” tab will display various types of plots for data visualizations. Some of the plots we are thinking of doing are time-series plot for price fluctuations over months, heatmap of flight prices by routes or depart/arrival airports, bar chart of total number of flights each month, scatter plot for flight price vs duration of flights and more. The “Price Prediction” tab will be implemented with a random forest model taking inputs such as departure date & time, airports, etc. and output a graph showing the predictions of flight prices. Lastly, there will be an “About” tab that has a write-up of the project overview and recommendations for the future.
+
+### Data Report 
+We decided to find a new dataset. The one we currently had was not US data, which was what we wanted to focus on, and the other one we had did not have as much specific information as we wanted for price prediction. So, we found another dataset that has more specific price information over time as well as other information about the flight itself. This will allow us to make a better model for price prediction. We will no longer be using the dataset with international data, but the other datasets we already had, we will keep as they have good information about flights that we can use for other aspects of the dashboard. 
+
+### Project Progress 
+The team has been working well together, combining our skills to advance the project. Everyone is communicating well with each other both on availability and on the project itself. Ideas are shared and discussed as a team before moving forward. Everyone does well explaining what they’ve been working on and commenting on their code so others can learn from it and contribute to it. Some roadblocks we’ve encountered as a team would just be availability as it is hard to coordinate a good meeting time for 4 people. Next steps for our group would be pulling in our new dataset to be able to begin modeling and then meeting up to work on the next aspect of our dashboard. 
+
+### Exploratory Analysis 
+With the datasets that we have, we have created a map that shows the flights to and from airports. We have not found any major outliers with our data so far, but one thing we have noticed is that the dataset is small and does not include as much information as we would like it to. The new dataset we found will also present some challenges. It is a very large dataset, but the data only spans 8 months out of a single year. This small span of time will make accurate prediction and modeling difficult, but we will try to work with the data that we have. We have also created some basic graphs that show the distribution of some variables over time and one that shows price vs the distance that the flight is. Something interesting we noted is that there is not as large of a correlation between those variables as we thought. 
+
+
+
+## 2025-03-07: Brainstorm Dashboard Milestone 
