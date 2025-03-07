@@ -1,3 +1,11 @@
+###
+# Problem to solve:
+# Randomly splitting train and test may cause one of them having airport codes that the other does not have.
+#
+# The current code could only predict routes with exact quarter, departure and arrival airports combination in the dataset.
+# Consider calculating miles for new unseen combinations?
+###
+
 library(tidyverse)
 library(caret)
 
@@ -18,7 +26,6 @@ trainData <- us_data[trainIndex, ]
 testData <- us_data[-trainIndex, ]
 
 mlr_model <- lm(fare ~ ., data = trainData)
-saveRDS(mlr_model, "./frequentflyers/mlr_model-PricePrediction.rds")
 
 # Function to take user input and predict price
 predict_flight_price <- function(quarter, departure_airport, arrival_airport) {
