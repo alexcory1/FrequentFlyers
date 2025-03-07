@@ -46,3 +46,17 @@ With the datasets that we have, we have created a map that shows the flights to 
 
 
 ## 2025-03-07: Brainstorm Dashboard Milestone 
+### Brainstorm Dashboard
+Our dashboard will include multiple tabs with different features on each. One will include a map of popular flights. This map will have user input features to allow a user to select specific airports for a range of years. Another tab will include exploratory analysis graphs and statistical information that we have found, including the month with the most routes, most popular flight, etc. The target audience for this dashboard is travelers or travel agents who want to figure out the price of a particular flight when planning out a trip. To make the dashboard, we have been using R and Shiny. The plots are made using plotly so they are able to be interacted with. 
+
+### Finalize Data Models 
+We have some usable datasets loaded to our GitHub repo that could be called directly in the R scripts. We are still working on our data models to predict flight prices and analyze flight trends. For price prediction, we will train a model and use it to predict flight prices based on the user's inputs. We are exploring XGBoost and linear regression. Our model aims to help users estimate flight prices based on selected criteria and understand price trends. Challenges we faced include dealing with high-cardinality categorical variables especially the airport codes. We are also trying out suitable ways to implement data validation on the user input side to solve the problem of non-existing input combinations in the dataset. 
+
+### Data Plan 
+We have encountered a few issues with our dataset. The dataset that we had at first was not exactly what we were hoping to have for our price prediction. It didn’t have the price of the same flight as it changes over time. Any datasets we found that included that information was too large and unusable or not free. So we have decided to use a dataset that we had found a while ago that included that information but was scrapped due to the fact that it was only composed of data from airports within India. To be able to complete our project, we will switch the focus to this dataset. This dataset should be big enough to be useful but small enough to be stored on github.
+
+### Project Progress
+We have the dashboard frames ready for each component and navigation through different screens is set up. We have added more plots for the data visualization part, and we started to train the ML model for price prediction. There is no major issue within team collaboration as everyone contributed to the project. The next steps for our group will be focusing on the price prediction ML model. We need to look into our datasets and decide the variables that should be used to train the model, and identify possible flaws when considering user input for prediction. We will also add more plots to the dashboard. The team has been working well together to figure out the layout of the dashboard and how to approach modeling. Everyone has been able to bring forward ideas and things that could be improved upon. 
+
+
+
