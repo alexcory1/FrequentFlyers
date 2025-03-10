@@ -22,6 +22,16 @@ plot_flights_per_quarter <- function(data) {
            yaxis = list(title = "Total Flights"))
 }
 
+# Stacked bar chart of total flights by quarters, stacked years
+plot_stacked_yearQuarter <- function(data) {
+  plot_ly(data, x = ~quarter, y = ~flight_count, color = ~factor(Year), type = "bar") %>%
+    layout(title = "Total Flights Per Quarter",
+           xaxis = list(title = "Quarter"),
+           yaxis = list(title = "Total Flights"),
+           barmode = "stack",
+           legend = list(title = list(text = "Year")))
+}
+
 # Scatter plot of flight price by flight distance
 plot_distance_vs_fare <- function(data) {
   # Fit a linear model
