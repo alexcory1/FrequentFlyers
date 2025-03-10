@@ -20,6 +20,11 @@ render_plots <- function(input, output) {
     plot_flights_per_quarter(yearQuarter_count_data())
   })
   
+  # Render stacked bar chart for total flights by quarter
+  output$stacked_yearQuarter_plot <- renderPlotly({
+    plot_stacked_yearQuarter(yearQuarter_count_data())
+  })
+  
   # Render scatter plot for flight fare by distance
   output$distance_fare_plot <- renderPlotly({
     plot_distance_vs_fare(distance_fare_data())
