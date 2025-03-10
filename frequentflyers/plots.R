@@ -16,14 +16,20 @@ plot_price_distribution <- function(data) {
 
 # Bar chart of total flights by quarters
 plot_flights_per_quarter <- function(data) {
-  req(data$quarter)  # Ensures the 'quarter' column exists
-  
-  data %>%
-    count(quarter) %>%
-    mutate(quarter = factor(quarter, levels = 1:4, labels = c("Q1", "Q2", "Q3", "Q4"))) %>%
-    plot_ly(x = ~quarter, y = ~n, type = "bar", marker = list(color = "#FF6666")) %>%
-    layout(title = "Total Flights Per Quarter", xaxis = list(title = "Quarter"), 
-           yaxis = list(title = "Total Flights (Log Scale)", type = "log"))
+  plot_ly(data, x = ~quarter, y = ~flight_count, type = "bar") %>% 
+    layout(title = "Total Flights Per Quarter",
+           xaxis = list(title = "Quarter"),
+           yaxis = list(title = "Total Flights"))
+}
+
+# Stacked bar chart of total flights by quarters, stacked years
+plot_stacked_yearQuarter <- function(data) {
+  plot_ly(data, x = ~quarter, y = ~flight_count, color = ~factor(Year), type = "bar") %>%
+    layout(title = "Total Flights Per Quarter",
+           xaxis = list(title = "Quarter"),
+           yaxis = list(title = "Total Flights"),
+           barmode = "stack",
+           legend = list(title = list(text = "Year")))
 }
 
 # Scatter plot of flight price by flight distance
