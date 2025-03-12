@@ -15,11 +15,6 @@ render_plots <- function(input, output) {
     plot_price_distribution(price_distribution_data())
   })
   
-  # Render bar chart for total flights per month
-  output$flights_per_month_plot <- renderPlotly({
-    plot_flights_per_quarter(yearQuarter_count_data())
-  })
-  
   # Render stacked bar chart for total flights by quarter
   output$stacked_yearQuarter_plot <- renderPlotly({
     plot_stacked_yearQuarter(yearQuarter_count_data())
