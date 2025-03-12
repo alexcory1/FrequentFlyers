@@ -16,7 +16,16 @@ load_USflight_data <- function() {
 # For price distribution
 price_distribution_data <- function() {
   data <- load_USflight_data()
-  price_distribution_data <- data %>% select(fare) %>% na.omit()
+  data <- data %>% select(fare) %>% na.omit()
+  
+  # Handle outliers
+  Q1 <- quantile(data$fare, 0.25)
+  Q3 <- quantile(data$fare, 0.75)
+  IQR_value <- Q3 - Q1
+  lower_bound <- Q1 - 1.5 * IQR_value
+  upper_bound <- Q3 + 1.5 * IQR_value
+  
+  price_distribution_data <- data %>% filter(fare >= lower_bound & fare <= upper_bound)
   return(price_distribution_data)
 }
 

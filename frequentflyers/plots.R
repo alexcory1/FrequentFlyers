@@ -14,14 +14,6 @@ plot_price_distribution <- function(data) {
   ggplotly(p)
 }
 
-# Bar chart of total flights by quarters
-plot_flights_per_quarter <- function(data) {
-  plot_ly(data, x = ~quarter, y = ~flight_count, type = "bar") %>% 
-    layout(title = "Total Flights Per Quarter",
-           xaxis = list(title = "Quarter"),
-           yaxis = list(title = "Total Flights"))
-}
-
 # Stacked bar chart of total flights by quarters, stacked years
 plot_stacked_yearQuarter <- function(data) {
   plot_ly(data, x = ~quarter, y = ~flight_count, color = ~factor(Year), type = "bar") %>%
