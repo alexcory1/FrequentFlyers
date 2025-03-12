@@ -3,6 +3,7 @@ library(dplyr)
 library(plotly)
 library(circlize)
 library(tibble)
+library(viridis)
 
 # Price distribution of the dataset
 plot_price_distribution <- function(data) {
@@ -16,7 +17,12 @@ plot_price_distribution <- function(data) {
 
 # Stacked bar chart of total flights by quarters, stacked years
 plot_stacked_yearQuarter <- function(data) {
-  plot_ly(data, x = ~quarter, y = ~flight_count, color = ~factor(Year), type = "bar") %>%
+  year_colors <- viridis_pal(option = "plasma")(13)
+  names(year_colors) <- unique(data$Year)
+  
+  plot_ly(data, x = ~quarter, y = ~flight_count, 
+          color = ~factor(Year), colors = year_colors, 
+          type = "bar") %>%
     layout(title = "Total Flights Per Quarter",
            xaxis = list(title = "Quarter"),
            yaxis = list(title = "Total Flights"),
