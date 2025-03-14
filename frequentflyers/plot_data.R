@@ -39,10 +39,10 @@ distance_fare_data <- function() {
 # For flight count by quarters per year
 yearQuarter_count_data <- function() {
   data <- load_USflight_data()
-  quarter_info <- c("Q1: Jan-Mar" = "#fd7f6f", 
-                    "Q2: Apr-Jun" = "#b2e061", 
-                    "Q3: Jul-Sep" = "#ffb55a", 
-                    "Q4: Oct-Dec" = "#8bd3c7")
+  quarter_info <- c("Q1: Jan-Mar" = "#d55e00", 
+                    "Q2: Apr-Jun" = "#009e73", 
+                    "Q3: Jul-Sep" = "#e69f00", 
+                    "Q4: Oct-Dec" = "#56b4e9")
   
   yearQuarter_count_data <- data %>% group_by(Year, quarter) %>% summarise(flight_count = n(), .groups = "drop")
   
