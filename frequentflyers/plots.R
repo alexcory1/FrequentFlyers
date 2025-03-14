@@ -55,10 +55,10 @@ plot_distance_vs_fare <- function(data) {
 
 # Group bar chart of flight count by quarters per year
 plot_yearQuarter_count <- function(data) {
-  quarter_info <- c("Q1: Jan-Mar" = "#fd7f6f", 
-                    "Q2: Apr-Jun" = "#b2e061", 
-                    "Q3: Jul-Sep" = "#ffb55a", 
-                    "Q4: Oct-Dec" = "#8bd3c7")
+  quarter_info <- c("Q1: Jan-Mar" = "#d55e00", 
+                    "Q2: Apr-Jun" = "#009e73", 
+                    "Q3: Jul-Sep" = "#e69f00", 
+                    "Q4: Oct-Dec" = "#56b4e9")
   plot_ly(data, x = ~Year, y = ~flight_count, 
           color = ~quarter, colors = quarter_info, 
           type = "scatter", mode = "lines+markers") %>% 
