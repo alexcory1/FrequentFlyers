@@ -60,3 +60,17 @@ We have the dashboard frames ready for each component and navigation through dif
 
 
 
+## 2025-03-14: Finalize Data Models Milestone 
+### Dashboard Sketch 
+The goal of our dashboard is to better inform travelers so they can make educated flight decisions. They will be able to visit our website and input their desired source and destination and will be outputted an estimated cost for that flight. We did find an example map that showed flight routes that we liked and modeled our map after. Our dashboard layout includes 5 tabs, each displaying different information. There is a home tab introducing the project and an about tab introducing the background information. We also have a tab for displaying various graphs we made. Another tab is our flights map. This map can be filtered by the user to choose different year ranges and specific airports. Our last tab is the price prediction tab. The user will be able to input source and destination to receive their predicted price. 
+
+### Project Progress 
+We added some new plots and improvised some of the existing plots. One of the big changes is changing the color palette to be colorblind friendly. We also explored a few machine learning models for flight price prediction. Our current roadblock is not being able to train a good enough ML model, as all the models have a high RMSE. Moving forward, we will be creating more plots and start adding some project overview to the Home tab.
+
+### Finalize Data Models 
+We continued working on our flight price prediction model from last week. We explored more machine learning models like Elastic Net and CatBoost. However, we found out that they all resulted in a high RMSE so we still need to explore other potential options. Our focus remains on selecting the most effective model that delivers reliable price estimates and helps users understand flight price trends.
+
+### Spring Break Plans 
+As a team we decided not to do any work on the dashboard over break. If a team member really wants to do some work, they are more than welcome to, of course, but they are not obligated to do any. 
+
+
