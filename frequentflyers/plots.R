@@ -63,7 +63,11 @@ plot_yearQuarter_count <- function(data) {
           color = ~quarter, colors = quarter_info, 
           type = "scatter", mode = "lines+markers") %>% 
     layout(title = "Total Flights Per Year & Quarter",
-           xaxis = list(title = "Year"),
+           xaxis = list(title = "Year",
+                        tickmode = "array",
+                        tickvals = unique(data$Year), 
+                        showgrid = FALSE,
+                        tickangle = -45),
            yaxis = list(title = "Total Flights"), 
            legend = list(title = list(text = "Quarter")))
 }
