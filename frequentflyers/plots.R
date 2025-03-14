@@ -59,7 +59,9 @@ plot_yearQuarter_count <- function(data) {
                     "Q2: Apr-Jun" = "#b2e061", 
                     "Q3: Jul-Sep" = "#ffb55a", 
                     "Q4: Oct-Dec" = "#8bd3c7")
-  plot_ly(data, x = ~Year, y = ~flight_count, color = ~quarter, colors = quarter_info, type = "bar") %>% 
+  plot_ly(data, x = ~Year, y = ~flight_count, 
+          color = ~quarter, colors = quarter_info, 
+          type = "scatter", mode = "lines+markers") %>% 
     layout(title = "Total Flights Per Year & Quarter",
            xaxis = list(title = "Year"),
            yaxis = list(title = "Total Flights"), 
