@@ -50,3 +50,12 @@ yearQuarter_count_data <- function() {
   
   return(yearQuarter_count_data)
 }
+
+# For flight price trend
+price_trend_data <- function() {
+  data <- load_USflight_data()
+  price_trend <- data %>%
+    group_by(Year, quarter) %>%
+    summarise(avg_fare = mean(fare, na.rm = TRUE), .groups = "drop")
+  return(price_trend)
+}

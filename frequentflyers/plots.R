@@ -72,5 +72,14 @@ plot_yearQuarter_count <- function(data) {
            legend = list(title = list(text = "Quarter")))
 }
 
-
+# Line chart of price trend over time
+plot_price_trend <- function(data) {
+  plot_ly(data, x = ~paste(Year, quarter, sep = "-"), y = ~avg_fare, 
+          type = "scatter", mode = "lines+markers", 
+          line = list(shape = "spline", width = 2, color = "#1f77b4")) %>%
+    layout(title = "Flight Price Trends Over Time",
+           xaxis = list(title = "Year-Month", tickangle = 45),
+           yaxis = list(title = "Average Fare (USD)", type = "log"), # Use log scale for better distribution
+           hovermode = "x")
+}
 

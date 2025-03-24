@@ -29,4 +29,9 @@ render_plots <- function(input, output) {
   output$yearQuarter_count_plot <- renderPlotly({
     plot_yearQuarter_count(yearQuarter_count_data())
   })
+  
+  # Render line chart for price trend over time
+  output$price_trend_plot <- renderPlotly({
+    plot_price_trend(price_trend_data())
+  })
 }
