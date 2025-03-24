@@ -25,7 +25,15 @@ trainIndex <- createDataPartition(us_data$fare, p = 0.8, list = FALSE)
 trainData <- us_data[trainIndex, ]
 testData <- us_data[-trainIndex, ]
 
+# Find missing airport codes in testData
+missing_airports_1 <- setdiff(levels(df$airport_1), levels(testData$airport_1))
+missing_airports_2 <- setdiff(levels(df$airport_2), levels(testData$airport_2))
+
+# Train model
 mlr_model <- lm(fare ~ ., data = trainData)
+
+# Test model
+## TODO
 
 # Function to take user input and predict price
 predict_flight_price <- function(quarter, departure_airport, arrival_airport) {
