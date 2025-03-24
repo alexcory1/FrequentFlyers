@@ -57,5 +57,6 @@ price_trend_data <- function() {
   price_trend <- data %>%
     group_by(Year, quarter) %>%
     summarise(avg_fare = mean(fare, na.rm = TRUE), .groups = "drop")
+  
   return(price_trend)
 }
