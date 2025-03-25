@@ -99,10 +99,11 @@ ui <- dashboardPage(
                 box(width = 12, height = "auto",
                     h4("Heatmap of Flight Prices by Routes"),
                     plotlyOutput("price_heatmap", width = "100%"))
+              
+              
+              )
+
               ),
-              
-              
-      ),
       tabItem(tabName = "pricePrediction",
               h2("Future Flight Prices Analysis"),
               
@@ -110,10 +111,36 @@ ui <- dashboardPage(
 
       tabItem(tabName = "about",
               h2("About Frequent Flyers"),
-              p("This project was created as our data science capstone project.
-                The end goal of this project is to create a product for frequent flyers to make educated decisions
-                about flying.")
+              br(),
+              
+              h4("📘 Summary of the Class"),
+              p("This dashboard was built for our Data Science capstone course at Iowa State University. The class emphasized real-world applications of data wrangling, visualization, interactive dashboards, and storytelling using R and Shiny."),
+              
+              h4("✈️ Project Overview"),
+              p("Frequent Flyers is an interactive Shiny dashboard that visualizes domestic U.S. flight data from 2013 to 2024. The platform features a dynamic flight map showing routes across airports, along with visual tools such as:"),
+              tags$ul(
+                tags$li("📍 Flight route map filtered by year and airport code"),
+                tags$li("📊 Histogram of fare distribution across all flights"),
+                tags$li("📈 Line chart of average flight fares over time"),
+                tags$li("🟦 Stacked bar charts of total flights by quarter and year"),
+                tags$li("📉 Scatter plot showing relationship between fare and distance"),
+                tags$li("🔄 Chord diagram showing most frequent routes"),
+                tags$li("🔥 Heatmap of flight prices between departure and arrival cities")
+              ),
+              p("All components are built in R using Shiny, Plotly, and Leaflet libraries to enable smooth interactivity and visual exploration."),
+              
+              h4("💡 Why We Chose This Project"),
+              p("With airfare constantly fluctuating and thousands of routes across the country, we wanted to build something that makes flying data more accessible. Travel is personal and widespread — so this dashboard helps both casual and frequent travelers make informed decisions using data."),
+              
+              h4("👥 Who Could Use This"),
+              tags$ul(
+                tags$li("• Travelers comparing price trends across routes"),
+                tags$li("• Airline analysts and transportation researchers"),
+                tags$li("• Data science students learning interactive dashboards"),
+                tags$li("• Anyone interested in trends within domestic air travel")
               )
+      )
+      
     )
   )
 )
