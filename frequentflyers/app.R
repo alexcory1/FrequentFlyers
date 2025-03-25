@@ -89,7 +89,13 @@ ui <- dashboardPage(
                 # 2 plots per row for box width = 6
                 box(height = "auto", plotlyOutput("distance_fare_plot", width = "100%")),
                 box(height = "auto", plotlyOutput("yearQuarter_count_plot", width = "100%"))
+              ),
+              fluidRow(
+                box(width = 12, height = "auto", 
+                    h4("Chord Diagram: Popular Routes"),
+                    plotOutput("chord_plot", height = "600px"))  
               )
+              
 
               ),
       tabItem(tabName = "pricePrediction",
@@ -112,7 +118,13 @@ ui <- dashboardPage(
 #It takes the parameters from the UI
 server <- function(input, output) {
   
-  render_plots(input = input, output = output)
+  render_plots(input = input, output = output, filtered_data = filtered_data)
+  
+  output$chord_plot <- renderPlot({
+    circos.clear()
+    plot_chord_diagram_routes(filtered_data())
+  })
+  
   
   #This reactively filters the year based on the slider
   #The reactive keyword means this function is called whenever the UI element is interacted with
@@ -138,6 +150,8 @@ server <- function(input, output) {
     }
   })
 
+  render_plots(input = input, output = output, filtered_data = filtered_data)
+  
   
   output$map <- renderLeaflet({
     #This computes the number of flights for the radius of the circle markers

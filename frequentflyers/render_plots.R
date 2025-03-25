@@ -8,7 +8,7 @@ library(plotly)
 library(circlize)
 library(tibble)
 
-render_plots <- function(input, output) {
+render_plots <- function(input, output,filtered_data) {
   
   # Render histogram for price distribution
   output$price_plot <- renderPlotly({
@@ -34,4 +34,18 @@ render_plots <- function(input, output) {
   output$price_trend_plot <- renderPlotly({
     plot_price_trend(price_trend_data())
   })
+  
+  output$chord_plot <- renderPlot({
+    circos.clear()
+    plot_chord_diagram_routes(filtered_data())
+  })
+  
+  output$chord_plot <- renderPlot({
+    print("Filtered data columns:")
+    print(colnames(filtered_data()))
+    circos.clear()
+    plot_chord_diagram_routes(filtered_data())
+  })
+  
 }
+
