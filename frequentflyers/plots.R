@@ -88,18 +88,18 @@ plot_chord_diagram_routes <- function(data, top_n = 15) {
   library(circlize)
   circos.clear()
   
-  # Group data
+  
   route_data <- data %>%
     group_by(city1, city2) %>%
     summarise(total_passengers = sum(passengers, na.rm = TRUE)) %>%
     ungroup()
   
-  # Take top N
+  
   top_routes <- route_data %>%
     arrange(desc(total_passengers)) %>%
     head(top_n)
   
-  # Prepare matrix
+  
   cities <- unique(c(top_routes$city1, top_routes$city2))
   matrix_data <- matrix(0, nrow = length(cities), ncol = length(cities),
                         dimnames = list(cities, cities))
@@ -110,16 +110,15 @@ plot_chord_diagram_routes <- function(data, top_n = 15) {
     matrix_data[city_a, city_b] <- top_routes$total_passengers[i]
   }
   
-  # Assign random colors to each city (or choose a palette)
   city_colors <- rand_color(length(cities), transparency = 0.3)
   names(city_colors) <- cities
   
-  # Plot
+ 
   chordDiagram(matrix_data, grid.col = city_colors, transparency = 0.4,
                directional = TRUE, direction.type = "arrows",
                annotationTrack = "grid", preAllocateTracks = list(track.height = 0.1))
   
-  # Add labels
+  
   circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
     sector.name = get.cell.meta.data("sector.index")
     circos.text(x = mean(get.cell.meta.data("xlim")), 
@@ -127,6 +126,22 @@ plot_chord_diagram_routes <- function(data, top_n = 15) {
                 labels = sector.name, facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex = 0.7)
   }, bg.border = NA)
 }
+
+#heatmap 
+p <- ggplot(heatmap_data, aes(x = city1, y = city2, fill = avg_fare)) +
+  geom_tile(color = "white") +
+  scale_fill_viridis_c(option = "plasma") +
+  labs(title = "Heatmap of Flight Prices by Routes",
+       x = "Departure City",
+       y = "Arrival City",
+       fill = "Avg Fare (USD)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
+        axis.text.y = element_text(size = 9),
+        plot.title = element_text(size = 16, face = "bold", hjust = 0.5))  # centers title
+
+ggplotly(p)
+
 
 
 

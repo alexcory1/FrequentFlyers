@@ -94,10 +94,15 @@ ui <- dashboardPage(
                 box(width = 12, height = "auto", 
                     h4("Chord Diagram: Popular Routes"),
                     plotOutput("chord_plot", height = "600px"))  
-              )
-              
-
               ),
+              fluidRow(
+                box(width = 12, height = "auto",
+                    h4("Heatmap of Flight Prices by Routes"),
+                    plotlyOutput("price_heatmap", width = "100%"))
+              ),
+              
+              
+      ),
       tabItem(tabName = "pricePrediction",
               h2("Future Flight Prices Analysis"),
               

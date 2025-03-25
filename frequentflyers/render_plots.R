@@ -47,5 +47,10 @@ render_plots <- function(input, output,filtered_data) {
     plot_chord_diagram_routes(filtered_data())
   })
   
+  output$price_heatmap <- renderPlotly({
+    plot_flight_price_heatmap(filtered_data())
+  })
+  
+  
 }
 
