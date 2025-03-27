@@ -1,0 +1,1 @@
+load("/Users/alexcory/rstudio/FrequentFlyers/model/flight_price_model.rds")
