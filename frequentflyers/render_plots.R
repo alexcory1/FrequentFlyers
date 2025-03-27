@@ -10,39 +10,27 @@ library(tibble)
 
 render_plots <- function(input, output,filtered_data) {
   
-  # Render histogram for price distribution
   output$price_plot <- renderPlotly({
     plot_price_distribution(price_distribution_data())
   })
   
-  # Render stacked bar chart for total flights by quarter
   output$stacked_yearQuarter_plot <- renderPlotly({
     plot_stacked_yearQuarter(yearQuarter_count_data())
   })
   
-  # Render scatter plot for flight fare by distance
   output$distance_fare_plot <- renderPlotly({
     plot_distance_vs_fare(distance_fare_data())
   })
   
-  # Render grouped bar chart for total flights by quarter per year
   output$yearQuarter_count_plot <- renderPlotly({
     plot_yearQuarter_count(yearQuarter_count_data())
   })
   
-  # Render line chart for price trend over time
   output$price_trend_plot <- renderPlotly({
     plot_price_trend(price_trend_data())
   })
   
   output$chord_plot <- renderPlot({
-    circos.clear()
-    plot_chord_diagram_routes(filtered_data())
-  })
-  
-  output$chord_plot <- renderPlot({
-    print("Filtered data columns:")
-    print(colnames(filtered_data()))
     circos.clear()
     plot_chord_diagram_routes(filtered_data())
   })
