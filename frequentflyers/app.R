@@ -63,20 +63,35 @@ ui <- dashboardPage(
                   style = "display: flex;
                   justify-content: center;
                   align-items: center;
-                  height: 20vh;
-                  font-size: 40px
+                  height: 15vh; 
+                  font-size: 40px;
                   font-weight: bold
                   ",
                   h2("Welcome to Frequent Flyers"),
               ),
-              div(tabName = "citation",
-                  style = "display: flex; justify-content: center; align-items: center; height: 0vh; font-size: 24px",
+              div(tabName = "citation", 
+                  style = "display: flex; justify-content: center; align-items: center; height: auto; font-size: 20px",
                   p(HTML("Created By: <a href='https://www.linkedin.com/in/amcory' target='_blank'>Alex Cory</a>,
                          <a href='https://www.linkedin.com/in/jillian-egland-3302a721a/' target='_blank'>Jillian Egland</a>,
                          <a href='https://www.linkedin.com/in/xuan-wen-loo/' target='_blank'>Michelle Loo</a>,
                          <a href='https://www.linkedin.com/in/snehal-arla-1a1346261/' target='_blank'>Snehal Arla</a>."))
               ),
-            ),
+              fluidRow(
+                box(width = 4, height = "auto", 
+                    h2("Dataset Overview"),
+                      tags$ul(
+                        tags$li("90262 data points "),
+                        tags$li("24 variables"),
+                        tags$li("xx airports ")
+                      ))
+              ),
+              
+              
+          
+              
+              
+              
+          ),#end of home tab 
       tabItem(tabName = "plots",
               h2("Flight Data Summary"),
               fluidRow(
