@@ -15,6 +15,7 @@ source("compute_flight_counts.R")
 source("plots.R")
 source("plot_data.R")
 source("render_plots.R")
+usaf <- read.csv("../data/raw/US_Airline_Flight.csv", stringsAsFactors = FALSE)
 
 #This is the main UI code These are often split into ui.r and app.r
 #This section is responsible for all UI elements
@@ -119,10 +120,44 @@ ui <- dashboardPage(
               )
 
               ),
+      
+      
       tabItem(tabName = "pricePrediction",
-              h2("Future Flight Prices Analysis"),
+              h2("Flight Price Prediction"),
               
-      ),
+              fluidRow(
+                box(width = 4,
+                    selectInput("departure_city", "Departure City:", 
+                                choices = unique(c(usaf$city1, usaf$city2)))
+                ),
+                fluidRow(
+                  box(width = 4,
+                      selectInput("arrival_city", "Arrival City:", 
+                                  choices = unique(c(usaf$city1, usaf$city2))))
+                ),
+                fluidRow(
+                  box(width = 4,
+                      selectInput("airline", "Airline:", 
+                                  choices = unique(usaf$carrier_lg)))
+                ),
+                fluidRow(
+                  box(width = 4,
+                      selectInput("quarter", "Quarter:", 
+                                  choices = c("Q1", "Q2", "Q3", "Q4"))),
+                  box(width = 4,
+                      numericInput("distance", "Distance (miles):", 
+                                   value = 500, min = 0))
+                ),
+                fluidRow(
+                  box(width = 12,
+                      actionButton("predict_btn", "Predict Price", 
+                                   class = "btn-primary"),
+                      br(), br(),
+                      h4("Predicted Price:"),
+                      verbatimTextOutput("prediction_output"),
+                      plotlyOutput("price_comparison_plot"))
+                )
+              )),
 
       tabItem(tabName = "about",
               h2("About Frequent Flyers"),
@@ -154,10 +189,10 @@ ui <- dashboardPage(
                 tags$li("• Data science students learning interactive dashboards"),
                 tags$li("• Anyone interested in trends within domestic air travel")
               )
+        )
       )
       
     )
-  )
 )
 
 
