@@ -75,6 +75,6 @@ As a team we decided not to do any work on the dashboard over break. If a team m
 
 
 
-## 2025-03-28: Dashboard Sketch Milestone
+## 2025-03-30: Finalize Dashboard Sketch
 Our dashboard currently has 5 tabs. The first tab is the home page which introduces our project and outlines some of our main findings and summary statistics. The second tab is our map which shows different routes between airports. This tab is able to be filtered by user input. The user can select a range of years and an airport code to filter the map to display routes within those years to or from that particular airport. The third tab is our plots tab. This contains all of the graphs that we have made exploring the dataset. They show distributions, price over time, and other useful information. The fourth tab is price prediction. This tab will contain our model for ticket price prediction. The user will be able to input source and destination airport and receive an estimated ticket price. The last tab is our About page. This tab contains information about the project itself, how we chose the project, and how we went about completing it. 
 
