@@ -155,8 +155,8 @@ plot_fare_by_carrier <- function(data) {
           type = "box", boxpoints = "outliers", jitter = 0.3, 
           pointpos = -1.8, marker = list(opacity = 0.5)) %>%
     layout(title = "Fare Distribution by Airline",
-           xaxis = list(title = "Airline", tickangle = -45),
-           yaxis = list(title = "Fare (USD)", type = "log"))
+           xaxis = list(title = "Airline", automargin = TRUE),
+           yaxis = list(title = "Fare (USD)", tickmode = "linear", tick0 = 0, dtick = 50))
 }
 
 

@@ -97,8 +97,10 @@ ui <- dashboardPage(
               fluidRow(
                 # 3 plots per row for box width = 4
                 box(width = 4, height = "auto", plotlyOutput("price_plot", width = "100%")),
-                box(width = 4, height = "auto", plotlyOutput("stacked_yearQuarter_plot", width = "100%")),
-                box(width = 4, height = "auto", plotlyOutput("fare_by_carrier", width = "100%"))
+                box(width = 4, height = "auto", plotlyOutput("stacked_yearQuarter_plot", width = "100%"))
+              ),
+              fluidRow(
+                box(width = 12, height = "auto", plotlyOutput("fare_by_carrier", width = "100%"))
               ),
               fluidRow(
                 # 2 plots per row for box width = 6
@@ -117,8 +119,6 @@ ui <- dashboardPage(
                 box(width = 12, height = "auto",
                     h4("Heatmap of Flight Prices by Routes"),
                     plotlyOutput("price_heatmap", width = "100%"))
-              
-              
               )
 
               ),
