@@ -39,6 +39,9 @@ render_plots <- function(input, output,filtered_data) {
     plot_flight_price_heatmap(filtered_data())
   })
   
+  output$fare_by_carrier <- renderPlotly({
+    plot_fare_by_carrier(price_distribution_data())
+  })
   
 }
 
