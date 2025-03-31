@@ -82,8 +82,14 @@ ui <- dashboardPage(
                       tags$ul(
                         tags$li("90262 data points "),
                         tags$li("24 variables"),
-                        tags$li("xx airports ")
-                      ))
+                        tags$li("179 US airports ")
+                      )),
+                box(width = 4, height = "auto", 
+                    h2("Summary Statistics"),
+                    tags$ul(
+                      tags$li("Average ticket price: 237.6845 USD"), 
+                      tags$li("Busiest airport: Dallas Fort Worth")
+                    ))
               ),
               
               
