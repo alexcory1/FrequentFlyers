@@ -120,10 +120,17 @@ plot_chord_diagram_routes <- function(data, top_n = 15) {
   
   
   circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
-    sector.name = get.cell.meta.data("sector.index")
-    circos.text(x = mean(get.cell.meta.data("xlim")), 
-                y = get.cell.meta.data("ylim")[1] + 1, 
-                labels = sector.name, facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex = 0.7)
+    sector.name <- get.cell.meta.data("sector.index")
+    x_pos <- mean(get.cell.meta.data("xlim"))
+    y_pos <- get.cell.meta.data("ylim")[1] + 1
+    
+    circos.text(x = x_pos, 
+                y = y_pos,  
+                labels = sector.name, 
+                facing = "inside",
+                niceFacing = TRUE, 
+                adj = c(0, 0.5), 
+                cex = 0.7)
   }, bg.border = NA)
   
   gg <- ggplot() + theme_void()
