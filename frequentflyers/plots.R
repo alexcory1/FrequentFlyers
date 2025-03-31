@@ -158,7 +158,3 @@ plot_fare_by_carrier <- function(data) {
            xaxis = list(title = "Airline", automargin = TRUE),
            yaxis = list(title = "Fare (USD)", tickmode = "linear", tick0 = 0, dtick = 50))
 }
-
-
-
-

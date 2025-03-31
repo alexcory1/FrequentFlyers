@@ -16,7 +16,7 @@ load_USflight_data <- function() {
 # For price distribution
 price_distribution_data <- function() {
   data <- load_USflight_data()
-  data <- data %>% select(fare, carrier_lg) %>% na.omit()
+  data <- data %>% na.omit()
   
   # Handle outliers
   Q1 <- quantile(data$fare, 0.25)
