@@ -32,7 +32,7 @@ render_plots <- function(input, output,filtered_data) {
   
   output$chord_plot <- renderPlot({
     circos.clear()
-    plot_chord_diagram_routes(price_distribution_data())
+    plot_chord_diagram_routes(price_distribution_data(), input$top_routes)
   })
   
   output$price_heatmap <- renderPlotly({

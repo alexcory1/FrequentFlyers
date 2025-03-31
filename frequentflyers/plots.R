@@ -125,6 +125,9 @@ plot_chord_diagram_routes <- function(data, top_n = 15) {
                 y = get.cell.meta.data("ylim")[1] + 1, 
                 labels = sector.name, facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex = 0.7)
   }, bg.border = NA)
+  
+  gg <- ggplot() + theme_void()
+  ggplotly(gg)
 }
 
 #heatmap 

@@ -119,6 +119,7 @@ ui <- dashboardPage(
               fluidRow(
                 box(width = 12, height = "auto", 
                     h4("Chord Diagram: Popular Routes"),
+                    sliderInput("top_routes", "Select number of Top Routes to display:", min = 10, max = 50, value = 15, step = 5),
                     plotOutput("chord_plot", height = "600px"))  
               ),
               fluidRow(
