@@ -168,3 +168,10 @@ plot_fare_by_carrier <- function(data) {
            xaxis = list(title = "Airline", automargin = TRUE),
            yaxis = list(title = "Fare (USD)", tickmode = "linear", tick0 = 0, dtick = 50))
 }
+
+plot_busiest_airports <- function(data){
+  data %>%
+    #mutate(airport_1=factor(airport_1, levels=airport_1)) %>%
+    ggplot(aes(x=airport_1, y=(flights_total))) + 
+    geom_bar(stat='identity') 
+}

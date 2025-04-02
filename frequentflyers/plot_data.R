@@ -78,3 +78,18 @@ price_trend_data <- function() {
   
   return(price_trend)
 }
+
+busiest_airport_data <- function(){
+  data <- load_USairports_data() 
+  airport_counts1 = data %>% group_by(airport_1) %>% summarize(flights_out = n())
+  airport_counts1 = airport_counts1[order(airport_counts1$flights_out, decreasing=TRUE), ]
+  
+  airport_counts2 = data %>% group_by(airport_2) %>% summarize(flights_in = n())
+  airport_counts2 = airport_counts2[order(airport_counts2$flights_in, decreasing=TRUE), ]
+  
+  airport_counts = merge(airport_counts1, airport_counts2, by.x="airport_1", by.y="airport_2")
+  airport_counts$flights_total = airport_counts$flights_in + airport_counts$flights_out
+  airport_counts = airport_counts[order(airport_counts$flights_total, decreasing=TRUE), ]
+  
+  return (head(airport_counts, 10))
+}

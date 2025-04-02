@@ -43,5 +43,9 @@ render_plots <- function(input, output,filtered_data) {
     plot_fare_by_carrier(price_distribution_data())
   })
   
+  output$busiest_airports <- renderPlotly({
+    plot_busiest_airports(busiest_airport_data())
+  })
+  
 }
 
