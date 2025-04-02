@@ -77,20 +77,34 @@ ui <- dashboardPage(
                          <a href='https://www.linkedin.com/in/snehal-arla-1a1346261/' target='_blank'>Snehal Arla</a>."))
               ),
               fluidRow(
-                box(width = 4, height = "auto", 
+                box(width = 6, height = "auto", 
                     h2("Dataset Overview"),
-                      tags$ul(
-                        tags$li("90262 data points "),
-                        tags$li("24 variables"),
-                        tags$li("179 US airports ")
-                      )),
-                box(width = 4, height = "auto", 
+                    tags$ul(
+                      tags$li("90262 data points "),
+                      tags$li("24 variables"),
+                      tags$li("179 US airports ")
+                    )),
+                box(width = 6, height = "auto", 
                     h2("Summary Statistics"),
                     tags$ul(
                       tags$li("Average ticket price: 237.6845 USD"), 
-                      tags$li("Busiest airport: Dallas Fort Worth")
+                      tags$li("Busiest airport: Dallas Fort Worth"),
+                      tags$li("Most popular route: XX ")
                     ))
               ),
+              fluidRow(
+                box(width = 4, height = "auto", plotlyOutput("price_trend_plot", width = "100%")),
+                
+              ),
+              fluidRow(
+                box(width = 6, height = "auto", 
+                    h2("Time"),
+                    tags$ul(
+                      tags$li("Most expensive Month: XX at XX USD"), 
+                      tags$li("Busiest Month: XX")
+                    ))
+              ),
+              
               
               
           

@@ -8,6 +8,24 @@ load_USflight_data <- function() {
   return(USflight_data)
 }
 
+# Function to load US_Airline_Flight.csv
+# joined with geocode to add airport names 
+load_USairports_data <- function() {
+  US_Airports <- read.csv("../data/raw/US_Airline_Flight.csv", header=TRUE)
+  geocode_tags <- read.csv("../data/raw/airport-codes-geocoded.csv", sep=";")
+  geous <- geocode_tags[geocode_tags$Country.Code == "US", ]
+  
+  US_Airports <- US_Airports %>%
+    left_join(geous, by = c("airport_1" = "Airport.Code")) %>%
+    rename(start_lat = Latitude, start_long = Longitude)
+  
+  US_Airports <- US_Airports %>%
+    left_join(geous, by = c("airport_2" = "Airport.Code")) %>%
+    rename(end_lat = Latitude, end_long = Longitude)
+  
+  return(US_Airports)
+}
+
 ## Add more functions to load other data
 
 
