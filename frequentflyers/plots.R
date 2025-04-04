@@ -139,29 +139,6 @@ plot_chord_diagram_routes <- function(data, top_n = 15) {
   ggplotly(gg)
 }
 
-#heatmap 
-plot_flight_price_heatmap <- function(data, top_n = 20) {
- 
-  heatmap_data <- data %>%
-    group_by(city1, city2) %>%
-    summarise(avg_fare = mean(fare, na.rm = TRUE), .groups = "drop") %>%
-    arrange(desc(avg_fare)) %>%
-    head(top_n)  # Select top N
-  
- 
-  p <- ggplot(heatmap_data, aes(x = city1, y = city2, fill = avg_fare)) +
-    geom_tile(color = "white") +
-    scale_fill_viridis_c(option = "plasma") +
-    labs(title = "Heatmap of Flight Prices by Routes",
-         x = "Departure City",
-         y = "Arrival City",
-         fill = "Avg Fare (USD)") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  
-  ggplotly(p) 
-}
-
 plot_fare_by_carrier <- function(data) {
   plot_ly(data, x = ~carrier_lg, y = ~fare, 
           type = "box", boxpoints = "outliers", jitter = 0.3, 
