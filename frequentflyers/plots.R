@@ -121,13 +121,15 @@ plot_chord_diagram_routes <- function(data, top_n = 15) {
   
   circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
     sector.name <- get.cell.meta.data("sector.index")
+    cleaned.name <- gsub("\\s*\\(.*\\)", "", sector.name)
+    
     x_pos <- mean(get.cell.meta.data("xlim"))
-    y_pos <- get.cell.meta.data("ylim")[1] + 1
+    y_pos <- get.cell.meta.data("ylim")[1]
     
     circos.text(x = x_pos, 
                 y = y_pos,  
-                labels = sector.name, 
-                facing = "inside",
+                labels = cleaned.name, 
+                facing = "clockwise",
                 niceFacing = TRUE, 
                 adj = c(0, 0.5), 
                 cex = 0.7)
