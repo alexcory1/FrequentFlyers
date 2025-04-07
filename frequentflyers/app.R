@@ -117,7 +117,6 @@ ui <- dashboardPage(
               fluidRow(
                 # 3 plots per row for box width = 4
                 box(width = 4, height = "auto", plotlyOutput("price_plot", width = "100%")),
-                #box(width = 4, height = "auto", plotlyOutput("plot_busiest_airports", width = "100%")),
                 box(width = 4, height = "auto", plotlyOutput("stacked_yearQuarter_plot", width = "100%")),
               ),
               fluidRow(

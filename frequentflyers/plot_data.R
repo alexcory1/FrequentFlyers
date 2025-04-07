@@ -8,23 +8,6 @@ load_USflight_data <- function() {
   return(USflight_data)
 }
 
-# Function to load US_Airline_Flight.csv
-# joined with geocode to add airport names 
-load_USairports_data <- function() {
-  US_Airports <- read.csv("../data/raw/US_Airline_Flight.csv", header=TRUE)
-  geocode_tags <- read.csv("../data/raw/airport-codes-geocoded.csv", sep=";")
-  geous <- geocode_tags[geocode_tags$Country.Code == "US", ]
-  
-  US_Airports <- US_Airports %>%
-    left_join(geous, by = c("airport_1" = "Airport.Code")) %>%
-    rename(start_lat = Latitude, start_long = Longitude)
-  
-  US_Airports <- US_Airports %>%
-    left_join(geous, by = c("airport_2" = "Airport.Code")) %>%
-    rename(end_lat = Latitude, end_long = Longitude)
-  
-  return(US_Airports)
-}
 
 ## Add more functions to load other data
 
@@ -32,8 +15,8 @@ load_USairports_data <- function() {
 ### Pre-processing data ###
 
 # For price distribution
-price_distribution_data <- function() {
-  data <- load_USflight_data()
+price_distribution_data <- function(data) {
+  #data <- load_USflight_data()
   data <- data %>% na.omit()
   
   # Handle outliers
@@ -48,15 +31,15 @@ price_distribution_data <- function() {
 }
 
 # For distance vs fare
-distance_fare_data <- function() {
-  data <- load_USflight_data()
+distance_fare_data <- function(data) {
+  #data <- load_USflight_data()
   distance_fare_data <- data %>% select(nsmiles, fare) %>% na.omit()
   return(distance_fare_data)
 }
 
 # For flight count by quarters per year
-yearQuarter_count_data <- function() {
-  data <- load_USflight_data()
+yearQuarter_count_data <- function(data) {
+  #data <- load_USflight_data()
   quarter_info <- c("Q1: Jan-Mar" = "#d55e00", 
                     "Q2: Apr-Jun" = "#009e73", 
                     "Q3: Jul-Sep" = "#e69f00", 
@@ -70,8 +53,8 @@ yearQuarter_count_data <- function() {
 }
 
 # For flight price trend
-price_trend_data <- function() {
-  data <- load_USflight_data()
+price_trend_data <- function(data) {
+  #data <- load_USflight_data()
   price_trend <- data %>%
     group_by(Year, quarter) %>%
     summarise(avg_fare = mean(fare, na.rm = TRUE), .groups = "drop")
@@ -79,8 +62,8 @@ price_trend_data <- function() {
   return(price_trend)
 }
 
-busiest_airport_data <- function(){
-  data <- load_USflight_data() 
+busiest_airport_data <- function(data){
+  #data <- load_USflight_data() 
   airport_counts1 = data %>% group_by(airport_1) %>% summarize(flights_out = n())
   airport_counts1 = airport_counts1[order(airport_counts1$flights_out, decreasing=TRUE), ]
   
