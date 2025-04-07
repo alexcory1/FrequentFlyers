@@ -93,7 +93,8 @@ ui <- dashboardPage(
                     ))
               ),
               fluidRow(
-                box(width = 4, height = "auto", plotlyOutput("plot_busiest_airports", width = "100%")),
+                #box(width = 4, height = "auto", plotlyOutput("stacked_yearQuarter_plot", width = "100%")),
+                box(width = 12, height = "auto", plotlyOutput("busiest_airports", width = "100%")),
                 
               ),
               fluidRow(
@@ -186,10 +187,10 @@ server <- function(input, output) {
   
   render_plots(input = input, output = output, filtered_data = filtered_data)
   
-  output$chord_plot <- renderPlot({
-    circos.clear()
-    plot_chord_diagram_routes(filtered_data())
-  })
+  #output$chord_plot <- renderPlot({
+    #circos.clear()
+    #plot_chord_diagram_routes(filtered_data())
+  #})
   
   
   #This reactively filters the year based on the slider

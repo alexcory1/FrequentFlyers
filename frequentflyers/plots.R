@@ -149,7 +149,7 @@ plot_fare_by_carrier <- function(data) {
 }
 
 plot_busiest_airports <- function(data){
-  ggplot(data) +
+  graph <- ggplot(data) +
     geom_bar(aes(x = airport_1, y = flights_total, fill = "Flights In"), stat = "identity") +
     geom_bar(aes(x = airport_1, y = flights_out, fill = "Flights Out"), stat = "identity") +
     scale_fill_manual(values = c("Flights In" = "#22aaa1", "Flights Out" = "#3e505b")) +
@@ -158,4 +158,6 @@ plot_busiest_airports <- function(data){
          y = "Number of Flights",
          fill = "Flight Type") +
     theme_minimal() 
+  
+   ggplotly(graph)
 }
