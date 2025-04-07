@@ -10,6 +10,8 @@ library(tibble)
 
 
 render_plots <- function(input, output,filtered_data) {
+  # one call to US flights dataset 
+  # use as parameter to the function that manipulates the data for the plots 
   USflight_data <- read.csv("../data/raw/US_Airline_Flight.csv", header = TRUE)
   
   
