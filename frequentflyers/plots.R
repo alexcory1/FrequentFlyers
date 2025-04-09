@@ -161,3 +161,24 @@ plot_busiest_airports <- function(data){
   
    ggplotly(graph)
 }
+
+# Bar chart: Top airlines by total miles flown
+plot_airline_miles <- function(data) {
+  data %>%
+    filter(!is.na(carrier_lg) & !is.na(nsmiles)) %>%
+    group_by(carrier_lg) %>%
+    summarise(total_miles = sum(nsmiles), .groups = "drop") %>%
+    arrange(desc(total_miles)) %>%
+    head(10) %>%
+    plot_ly(
+      x = ~carrier_lg,
+      y = ~total_miles,
+      type = 'bar',
+      marker = list(color = 'darkgreen')
+    ) %>%
+    layout(
+      title = "Top 10 Airlines by Total Miles Flown",
+      xaxis = list(title = "Airline Code"),
+      yaxis = list(title = "Total Miles Traveled")
+    )
+}

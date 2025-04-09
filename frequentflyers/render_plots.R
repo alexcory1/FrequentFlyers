@@ -53,5 +53,10 @@ render_plots <- function(input, output,filtered_data) {
     plot_busiest_airports(busiest_airport_data(USflight_data))
   })
   
+  output$airline_miles <- renderPlotly({
+    plot_airline_miles(USflight_data)
+  })
+  
+  
 }
 
