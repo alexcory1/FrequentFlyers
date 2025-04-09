@@ -89,11 +89,10 @@ ui <- dashboardPage(
                     tags$ul(
                       tags$li("Average ticket price: 237.6845 USD"), 
                       tags$li("Busiest airport: Dallas Fort Worth"),
-                      tags$li("Most popular route: XX ")
+                      tags$li("Most popular route: Los Angeles to San Francisco")
                     ))
               ),
               fluidRow(
-                #box(width = 4, height = "auto", plotlyOutput("stacked_yearQuarter_plot", width = "100%")),
                 box(width = 12, height = "auto", plotlyOutput("busiest_airports", width = "100%")),
                 
               ),
@@ -101,8 +100,8 @@ ui <- dashboardPage(
                 box(width = 6, height = "auto", 
                     h2("Time"),
                     tags$ul(
-                      tags$li("Most expensive Month: XX at XX USD"), 
-                      tags$li("Busiest Month: XX")
+                      tags$li("Most Expensive Month: February of 2022 with an average fare of 268 USD"), 
+                      tags$li("Busiest Months: July-September in 2016")
                     ))
               ),
               
@@ -151,23 +150,23 @@ ui <- dashboardPage(
                 br(),
                 
                 fluidRow(
-                  box(width = 12, title = "📘 Course Context", status = "primary", solidHeader = TRUE,
+                  box(width = 12, height = "auto", title = "📘 Course Context", status = "primary", solidHeader = TRUE,
                       "Frequent Flyers was created for our Data Science capstone course at Iowa State University. 
           The course emphasized using R and Shiny for real-world data visualization, interactive design, 
           and storytelling with a purpose.")
                 ),
                 
                 fluidRow(
-                  box(width = 6, title = "✈️ What Is Frequent Flyers?", status = "info", solidHeader = TRUE,
+                  box(width = 6, height = "auto", title = "✈️ What Is Frequent Flyers?", status = "info", solidHeader = TRUE,
                       "An interactive dashboard that makes sense of over 90,000 U.S. domestic flights from 2013–2024. 
           Users can explore fare trends, airline performance, busy airports, and even predict prices!"),
                   
-                  box(width = 6, title = "💡 Our Why", status = "success", solidHeader = TRUE,
+                  box(width = 6, height = "auto", title = "💡 Our Why", status = "success", solidHeader = TRUE,
                       "Flying is expensive, chaotic, and confusing. Our goal? Use data to bring clarity and confidence to travelers and analysts alike.")
                 ),
                 
                 fluidRow(
-                  box(width = 6, title = "👥 Who Can Use This?", status = "warning", solidHeader = TRUE,
+                  box(width = 6, height = "auto", title = "👥 Who Can Use This?", status = "warning", solidHeader = TRUE,
                       tags$ul(
                         tags$li("✈️ Travelers comparing price trends"),
                         tags$li("📊 Airline and airport analysts"),
@@ -176,7 +175,7 @@ ui <- dashboardPage(
                       )
                   ),
                   
-                  box(width = 6, title = "🔍 What You Can Explore (Our 8 Visuals)", status = "danger", solidHeader = TRUE,
+                  box(width = 6, height = "auto", title = "🔍 What You Can Explore (Our 8 Visuals)", status = "danger", solidHeader = TRUE,
                       tags$ul(
                         tags$li("1️⃣ 📈 *Flight Fare Distribution* – Histogram of fares across all flights"),
                         tags$li("2️⃣ 🟦 *Flights by Quarter & Year* – Stacked bar chart over time"),
@@ -191,7 +190,7 @@ ui <- dashboardPage(
                 ),
                 
                 fluidRow(
-                  box(width = 12, title = "📦 Tech Stack", status = "primary", solidHeader = TRUE,
+                  box(width = 12, height = "auto", title = "📦 Tech Stack", status = "primary", solidHeader = TRUE,
                       tags$ul(
                         tags$li("🖥 R & Shiny – Core dashboard development"),
                         tags$li("📈 Plotly – Interactive plots and visuals"),

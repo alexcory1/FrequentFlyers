@@ -148,6 +148,7 @@ plot_fare_by_carrier <- function(data) {
            yaxis = list(title = "Fare (USD)", tickmode = "linear", tick0 = 0, dtick = 50))
 }
 
+#
 plot_busiest_airports <- function(data){
   graph <- ggplot(data) +
     geom_bar(aes(x = airport_1, y = flights_total, fill = "Flights In"), stat = "identity") +
@@ -157,6 +158,7 @@ plot_busiest_airports <- function(data){
          x = "Airport",
          y = "Number of Flights",
          fill = "Flight Type") +
+    ggtitle("Top 15 Busiest Airports by Number of Flights") + 
     theme_minimal() 
   
    ggplotly(graph)
