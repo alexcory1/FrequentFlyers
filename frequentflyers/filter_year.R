@@ -1,7 +1,7 @@
 filter_year <- function(flight_year) {
 
-  US_Airline_Flight <- read.csv("../data/raw/US_Airline_Flight.csv", header=TRUE)
-  geocode_tags <- read.csv("../data/raw/airport-codes-geocoded.csv", sep=";")
+  US_Airline_Flight <- read.csv("data/raw/US_Airline_Flight.csv", header=TRUE)
+  geocode_tags <- read.csv("data/raw/airport-codes-geocoded.csv", sep=";")
   geous <- geocode_tags[geocode_tags$Country.Code == "US", ]
 
   US_Airline_Flight <- US_Airline_Flight %>%
