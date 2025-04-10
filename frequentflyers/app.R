@@ -16,6 +16,12 @@ source("plots.R")
 source("plot_data.R")
 source("render_plots.R")
 
+# Load raw data to get valid city/quarter combinations
+flight_raw <- read.csv("./data/raw/US_Airline_Flight.csv", stringsAsFactors = FALSE)
+valid_routes <- flight_raw %>%
+  select(city1, city2, quarter) %>%
+  distinct()
+
 #This is the main UI code These are often split into ui.r and app.r
 #This section is responsible for all UI elements
 ui <- dashboardPage(
@@ -141,7 +147,23 @@ ui <- dashboardPage(
               ),
       tabItem(tabName = "pricePrediction",
               h2("Future Flight Prices Analysis"),
-              
+              fluidRow(
+                box(width = 4,
+                    selectInput("city1", "Select Departure City", choices = sort(unique(valid_routes$city1)))
+                ),
+                box(width = 4,
+                    uiOutput("city2_ui")
+                ),
+                box(width = 4,
+                    uiOutput("quarter_ui")
+                )
+              ),
+              #fluidRow(
+              #  box(width = 12,
+              #      actionButton("predict_btn", "Predict Fare"),
+              #      verbatimTextOutput("fare_prediction")
+              #  )
+              #)
       ),
 
       tabItem(tabName = "about",
@@ -214,7 +236,7 @@ ui <- dashboardPage(
 #This is the backend code.
 #It takes the parameters from the UI
 server <- function(input, output) {
-  
+  # Stuff for map:
   render_plots(input = input, output = output, filtered_data = filtered_data)
   
   #output$chord_plot <- renderPlot({
@@ -285,6 +307,30 @@ server <- function(input, output) {
                        radius = ~log(total_flight_count)/1.5) %>%
       addLegend("bottomright", colors = c("#355834", "blue"), labels = c("Airport", "Flight Path"), title = "Legend")
   })
+  
+  # Stuff for prediction:
+  output$city2_ui <- renderUI({
+    req(input$city1)
+    available_city2 <- valid_routes %>%
+      filter(city1 == input$city1) %>%
+      pull(city2) %>%
+      unique() %>%
+      sort()
+    
+    selectInput("city2", "Select Arrival City", choices = available_city2)
+  })
+  
+  output$quarter_ui <- renderUI({
+    req(input$city1, input$city2)
+    available_quarters <- valid_routes %>%
+      filter(city1 == input$city1, city2 == input$city2) %>%
+      pull(quarter) %>%
+      unique() %>%
+      sort()
+    
+    selectInput("quarter", "Select Quarter", choices = available_quarters)
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)
