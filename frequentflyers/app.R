@@ -158,12 +158,12 @@ ui <- dashboardPage(
                     uiOutput("quarter_ui")
                 )
               ),
-              #fluidRow(
-              #  box(width = 12,
-              #      actionButton("predict_btn", "Predict Fare"),
-              #      verbatimTextOutput("fare_prediction")
-              #  )
-              #)
+              fluidRow(
+                box(width = 12,
+                    actionButton("predict_btn", "Predict Fare", icon = icon("calculator")),
+                    verbatimTextOutput("fare_prediction")
+                )
+              )
       ),
 
       tabItem(tabName = "about",
