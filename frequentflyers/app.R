@@ -334,41 +334,32 @@ server <- function(input, output) {
   observeEvent(input$predict_btn, {
     req(input$city1, input$city2, input$quarter)
     
-    model <- readRDS("../flight_price_model.rds")
-    metadata <- readRDS("../model_metadata.rds")
+    model <- readRDS("final_flight_price_model.rds")
+    metadata <- readRDS("final_model_metadata.rds")
     
-    cat_cols <- metadata$cat_cols
-    factor_levels <- metadata$factor_levels
+    input_df <- as.data.frame(matrix(0, nrow = 1, ncol = length(metadata$feature_names)))
+    colnames(input_df) <- metadata$feature_names
     
-    input_df <- data.frame(city1 = input$city1,
-                           city2 = input$city2,
-                           quarter = as.integer(input$quarter),
-                           stringsAsFactors = FALSE)
-    
-    missing_cols <- setdiff(cat_cols, names(input_df))
-    for (col in missing_cols) {
-      input_df[[col]] <- NA
-    }
-    
-    input_df <- input_df[, cat_cols, drop = FALSE]
-    
-    for (col in cat_cols) {
-      input_df[[col]] <- factor(input_df[[col]], levels = factor_levels[[col]])
-      input_df[[col]] <- as.numeric(input_df[[col]])
-    }
-    
-    model_features <- model$feature_names
-    
-    missing <- setdiff(model_features, names(input_df))
-    input_df[missing] <- 0
-    
-    input_df <- input_df[, model_features, drop = FALSE]
-    input_matrix <- as.matrix(input_df)
-    
-    pred_fare <- predict(model, input_matrix)
-    
-    output$fare_prediction <- renderText({
-      paste0("Predicted Price: $", round(pred_fare, 2))
+    tryCatch({
+      input_df$city1 <- as.numeric(factor(input$city1, levels = metadata$factor_mappings$city1))
+      input_df$city2 <- as.numeric(factor(input$city2, levels = metadata$factor_mappings$city2))
+      input_df$quarter <- as.integer(input$quarter)
+      
+      input_matrix <- as.matrix(input_df[, metadata$feature_names])
+      
+      # Debugging
+     # print("Prediction input matrix:")
+     # print(head(input_matrix))
+      ##
+      
+      pred_fare <- predict(model, input_matrix)
+      output$fare_prediction <- renderText({
+        paste0("Predicted Price: $", round(pred_fare, 2))
+      })
+    }, error = function(e) {
+      output$fare_prediction <- renderText({
+        paste("Prediction error:", e$message)
+      })
     })
   })
   
