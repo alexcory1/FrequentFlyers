@@ -10,11 +10,16 @@ df <- df[, !names(df) %in% c("tbl", "X", "tbl1apk", "fare_lg", "fare_low")]
 
 #Converts categories to factors
 cat_cols <- names(df)[sapply(df, is.character)]
-df[cat_cols] <- lapply(df[cat_cols], as.factor)
+# Implement level mapping
+factor_mappings <- list()
+for (col in cat_cols) {
+  df[[col]] <- factor(df[[col]])
+  factor_mappings[[col]] <- levels(df[[col]])
+}
 
 #XGBoost needs numerics, cast from factor to numeric
 for (col in cat_cols) {
-  df[[col]] <- as.numeric(as.factor(df[[col]]))
+  df[[col]] <- as.numeric(df[[col]])
 }
 
 X <- as.matrix(df[, !names(df) %in% "fare"])
@@ -85,4 +90,11 @@ test_rmse <- sqrt(mean((preds - y_test)^2))
 print(paste("Test RMSE:", test_rmse))
 
 saveRDS(final_model, "flight_price_model.rds")
-saveRDS(list(cat_cols = cat_cols, factor_levels = lapply(df[cat_cols], levels)), "model_metadata.rds")
+saveRDS(list(
+  cat_cols = cat_cols,
+  factor_mappings = factor_mappings,
+  feature_names = colnames(X)
+), "model_metadata.rds")
+
+## To prevent irreversible changes, both .rds files are renamed with "final_" prefix and used in app.R 
+## So changing stuff here won't affect the running app until you rename the rds files
