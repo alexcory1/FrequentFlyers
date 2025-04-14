@@ -86,3 +86,5 @@ Our dashboard is mostly functional. The prediction model is made, but we are sti
 
 
 
+## 2025-04-13: Add Models to Dashboard 
+Our model is currently saved to our github. It was made using XGBoost. It takes in user input of source airport, destination airport, and quarter of the year and will return a predicted ticket price for a flight. The prediction tab on our dashboard now has the input options available for the user to select. The model has also been added to our dashboard and gives an output given user input. 

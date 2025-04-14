@@ -301,6 +301,38 @@ server <- function(input, output) {
     selectInput("quarter", "Select Quarter", choices = available_quarters)
   })
   
+  observeEvent(input$predict_btn, {
+    req(input$city1, input$city2, input$quarter)
+    
+    model <- readRDS("final_flight_price_model.rds")
+    metadata <- readRDS("final_model_metadata.rds")
+    
+    input_df <- as.data.frame(matrix(0, nrow = 1, ncol = length(metadata$feature_names)))
+    colnames(input_df) <- metadata$feature_names
+    
+    tryCatch({
+      input_df$city1 <- as.numeric(factor(input$city1, levels = metadata$factor_mappings$city1))
+      input_df$city2 <- as.numeric(factor(input$city2, levels = metadata$factor_mappings$city2))
+      input_df$quarter <- as.integer(input$quarter)
+      
+      input_matrix <- as.matrix(input_df[, metadata$feature_names])
+      
+      # Debugging
+     # print("Prediction input matrix:")
+     # print(head(input_matrix))
+      ##
+      
+      pred_fare <- predict(model, input_matrix)
+      output$fare_prediction <- renderText({
+        paste0("Predicted Price: $", round(pred_fare, 2))
+      })
+    }, error = function(e) {
+      output$fare_prediction <- renderText({
+        paste("Prediction error:", e$message)
+      })
+    })
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)
