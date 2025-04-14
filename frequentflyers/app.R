@@ -68,7 +68,7 @@ ui <- dashboardPage(
                   style = "display: flex;
                   justify-content: center;
                   align-items: center;
-                  height: 15vh; 
+                  height: 5vh; 
                   font-size: 40px;
                   font-weight: bold
                   ",
