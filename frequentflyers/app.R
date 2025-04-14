@@ -44,8 +44,7 @@ ui <- dashboardPage(
       menuItem("Home", tabName = "home", icon = icon("home")),
       menuItem("Map", tabName = "map", icon = icon("map")),
       menuItem("Plots", tabName = "plots", icon = icon("plane")),
-      menuItem("Price Prediction", tabName = "pricePrediction", icon = icon("dollar-sign")),
-      menuItem("About", tabName = "about", icon = icon("info-circle"))
+      menuItem("Price Prediction", tabName = "pricePrediction", icon = icon("dollar-sign"))
     )
   ),
 
@@ -83,33 +82,60 @@ ui <- dashboardPage(
                          <a href='https://www.linkedin.com/in/snehal-arla-1a1346261/' target='_blank'>Snehal Arla</a>."))
               ),
               fluidRow(
-                box(width = 6, height = "auto", 
-                    h2("Dataset Overview"),
-                    tags$ul(
-                      tags$li("90262 data points "),
-                      tags$li("24 variables"),
-                      tags$li("179 US airports ")
-                    )),
-                box(width = 6, height = "auto", 
-                    h2("Summary Statistics"),
-                    tags$ul(
-                      tags$li("Average ticket price: 237.6845 USD"), 
-                      tags$li("Busiest airport: Dallas Fort Worth"),
-                      tags$li("Most popular route: Los Angeles to San Francisco")
-                    ))
+                box(width = 12, height = "auto", title = "📘 Course Context", status = "primary", solidHeader = TRUE,
+                    "Frequent Flyers was created for our Data Science capstone course at Iowa State University. 
+          The course emphasized using R and Shiny for real-world data visualization, interactive design, 
+          and storytelling with a purpose.")
               ),
+              
               fluidRow(
-                box(width = 12, height = "auto", plotlyOutput("busiest_airports", width = "100%")),
+                box(width = 6, height = "auto", title = "✈️ What Is Frequent Flyers?", status = "info", solidHeader = TRUE,
+                    "An interactive dashboard that makes sense of over 90,000 U.S. domestic flights from 2013–2024. 
+          Users can explore fare trends, airline performance, busy airports, and even predict prices!"),
                 
+                box(width = 6, height = "auto", title = "💡 Our Why", status = "success", solidHeader = TRUE,
+                    "Flying is expensive, chaotic, and confusing. Our goal? Use data to bring clarity and confidence to travelers and analysts alike.")
               ),
+              
               fluidRow(
-                box(width = 6, height = "auto", 
-                    h2("Time"),
+                box(width = 6, height = "auto", title = "👥 Who Can Use This?", status = "warning", solidHeader = TRUE,
                     tags$ul(
-                      tags$li("Most Expensive Month: February of 2022 with an average fare of 268 USD"), 
-                      tags$li("Busiest Months: July-September in 2016")
-                    ))
+                      tags$li("✈️ Travelers comparing price trends"),
+                      tags$li("📊 Airline and airport analysts"),
+                      tags$li("🧠 Data science students learning Shiny"),
+                      tags$li("🤓 Anyone interested in air travel data")
+                    )
+                ),
+                
+                box(width = 6, height = "auto", title = "🔍 What You Can Explore (Our 8 Visuals)", status = "danger", solidHeader = TRUE,
+                    tags$ul(
+                      tags$li("1️⃣ 📈 *Flight Fare Distribution* – Histogram of fares across all flights"),
+                      tags$li("2️⃣ 🟦 *Flights by Quarter & Year* – Stacked bar chart over time"),
+                      tags$li("3️⃣ 📊 *Fare vs Distance* – Scatter plot showing correlation"),
+                      tags$li("4️⃣ 📉 *Flight Price Trend Over Time* – Line chart with quarterly average fares"),
+                      tags$li("5️⃣ 🛫 *Flight Route Map* – Interactive Leaflet map by year & airport"),
+                      tags$li("6️⃣ 🛬 *Total Flights by Airport* – Bar chart of inbound/outbound flights"),
+                      tags$li("7️⃣ 🔄 *Chord Diagram* – Most frequent city-to-city connections"),
+                      tags$li("8️⃣ ✈️ *Top Airlines by Miles Flown* – Bar chart showing cumulative distance flown")
+                    )
+                )
               ),
+              
+              fluidRow(
+                box(width = 12, height = "auto", title = "📦 Tech Stack", status = "primary", solidHeader = TRUE,
+                    tags$ul(
+                      tags$li("🖥 R & Shiny – Core dashboard development"),
+                      tags$li("📈 Plotly – Interactive plots and visuals"),
+                      tags$li("🌍 Leaflet – Dynamic flight route mapping"),
+                      tags$li("🧠 Machine Learning – XGBoost & CatBoost for price prediction")
+                    )
+                )
+              ),
+              
+              br(),
+              div(style = "text-align: center; font-size: 18px;",
+                  "Thanks for flying with us. Clear skies and clean code ahead! 🚀")
+      
               
               
               
@@ -130,6 +156,10 @@ ui <- dashboardPage(
                 box(width = 12, height = "auto", plotlyOutput("fare_by_carrier", width = "100%"))
               ),
               fluidRow(
+                box(width = 12, height = "auto", plotlyOutput("busiest_airports", width = "100%")),
+                
+              ),
+              fluidRow(
                 # 2 plots per row for box width = 6
                 box(height = "auto", plotlyOutput("distance_fare_plot", width = "100%")),
                 box(height = "auto", plotlyOutput("yearQuarter_count_plot", width = "100%"))
@@ -137,6 +167,7 @@ ui <- dashboardPage(
               fluidRow(
                 box(width = 12, height = "auto", plotlyOutput("price_trend_plot", width = "100%"))
               ),
+              
               fluidRow(
                 box(width = 12, height = "auto", 
                     h4("Chord Diagram: Popular Routes"),
@@ -164,69 +195,8 @@ ui <- dashboardPage(
                     verbatimTextOutput("fare_prediction")
                 )
               )
-      ),
+      )#
 
-      tabItem(tabName = "about",
-              fluidPage(
-                h1("🛫 About Frequent Flyers", align = "center"),
-                br(),
-                
-                fluidRow(
-                  box(width = 12, height = "auto", title = "📘 Course Context", status = "primary", solidHeader = TRUE,
-                      "Frequent Flyers was created for our Data Science capstone course at Iowa State University. 
-          The course emphasized using R and Shiny for real-world data visualization, interactive design, 
-          and storytelling with a purpose.")
-                ),
-                
-                fluidRow(
-                  box(width = 6, height = "auto", title = "✈️ What Is Frequent Flyers?", status = "info", solidHeader = TRUE,
-                      "An interactive dashboard that makes sense of over 90,000 U.S. domestic flights from 2013–2024. 
-          Users can explore fare trends, airline performance, busy airports, and even predict prices!"),
-                  
-                  box(width = 6, height = "auto", title = "💡 Our Why", status = "success", solidHeader = TRUE,
-                      "Flying is expensive, chaotic, and confusing. Our goal? Use data to bring clarity and confidence to travelers and analysts alike.")
-                ),
-                
-                fluidRow(
-                  box(width = 6, height = "auto", title = "👥 Who Can Use This?", status = "warning", solidHeader = TRUE,
-                      tags$ul(
-                        tags$li("✈️ Travelers comparing price trends"),
-                        tags$li("📊 Airline and airport analysts"),
-                        tags$li("🧠 Data science students learning Shiny"),
-                        tags$li("🤓 Anyone interested in air travel data")
-                      )
-                  ),
-                  
-                  box(width = 6, height = "auto", title = "🔍 What You Can Explore (Our 8 Visuals)", status = "danger", solidHeader = TRUE,
-                      tags$ul(
-                        tags$li("1️⃣ 📈 *Flight Fare Distribution* – Histogram of fares across all flights"),
-                        tags$li("2️⃣ 🟦 *Flights by Quarter & Year* – Stacked bar chart over time"),
-                        tags$li("3️⃣ 📊 *Fare vs Distance* – Scatter plot showing correlation"),
-                        tags$li("4️⃣ 📉 *Flight Price Trend Over Time* – Line chart with quarterly average fares"),
-                        tags$li("5️⃣ 🛫 *Flight Route Map* – Interactive Leaflet map by year & airport"),
-                        tags$li("6️⃣ 🛬 *Total Flights by Airport* – Bar chart of inbound/outbound flights"),
-                        tags$li("7️⃣ 🔄 *Chord Diagram* – Most frequent city-to-city connections"),
-                        tags$li("8️⃣ ✈️ *Top Airlines by Miles Flown* – Bar chart showing cumulative distance flown")
-                      )
-                  )
-                ),
-                
-                fluidRow(
-                  box(width = 12, height = "auto", title = "📦 Tech Stack", status = "primary", solidHeader = TRUE,
-                      tags$ul(
-                        tags$li("🖥 R & Shiny – Core dashboard development"),
-                        tags$li("📈 Plotly – Interactive plots and visuals"),
-                        tags$li("🌍 Leaflet – Dynamic flight route mapping"),
-                        tags$li("🧠 Machine Learning – XGBoost & CatBoost for price prediction")
-                      )
-                  )
-                ),
-                
-                br(),
-                div(style = "text-align: center; font-size: 18px;",
-                    "Thanks for flying with us. Clear skies and clean code ahead! 🚀")
-              )
-      )
       
     )
   )
