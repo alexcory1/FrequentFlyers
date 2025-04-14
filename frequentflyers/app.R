@@ -109,18 +109,19 @@ ui <- dashboardPage(
                 
                 box(width = 6, height = "auto", title = "🔍 What You Can Explore (Our 8 Visuals)", status = "danger", solidHeader = TRUE,
                     tags$ul(
-                      tags$li("1️⃣ 📈 *Flight Fare Distribution* – Histogram of fares across all flights"),
-                      tags$li("2️⃣ 🟦 *Flights by Quarter & Year* – Stacked bar chart over time"),
-                      tags$li("3️⃣ 📊 *Fare vs Distance* – Scatter plot showing correlation"),
-                      tags$li("4️⃣ 📉 *Flight Price Trend Over Time* – Line chart with quarterly average fares"),
-                      tags$li("5️⃣ 🛫 *Flight Route Map* – Interactive Leaflet map by year & airport"),
-                      tags$li("6️⃣ 🛬 *Total Flights by Airport* – Bar chart of inbound/outbound flights"),
-                      tags$li("7️⃣ 🔄 *Chord Diagram* – Most frequent city-to-city connections"),
-                      tags$li("8️⃣ ✈️ *Top Airlines by Miles Flown* – Bar chart showing cumulative distance flown")
+                      tags$li("1️⃣📈", tags$strong(" Flight Fare Distribution"), " - Histogram of fares across all flights"),
+                      tags$li("2️⃣🟦", tags$strong(" Flights by Quarter & Year"), " - Stacked bar chart over time"),
+                      tags$li("3️⃣📊", tags$strong(" Fare vs Distance"), " - Scatter plot showing correlation"),
+                      tags$li("4️⃣📉", tags$strong(" Flight Price Trend Over Time"), " - Line chart with quarterly average fares"),
+                      tags$li("5️⃣🛫", tags$strong(" Busiest Airports by Flight Counts"), " Histogram in inbound and outbound flight count"),
+                      tags$li("6️⃣🛬", tags$strong(" Flight Route Map"), " - Interactive Leaflet map by year & airport"),
+                      tags$li("7️⃣🔄", tags$strong(" Total Flights by Airport"), " - Bar chart of inbound/outbound flights"),
+                      tags$li("8️⃣✈", tags$strong(" Chord Diagram"), " - Most frequent city-to-city connections"),
+                      tags$li("9️⃣", tags$strong("️ Top Airlines by Miles Flown"), " - Bar chart showing cumulative distance flown")
                     )
                 )
               ),
-              
+
               fluidRow(
                 box(width = 12, height = "auto", title = "📦 Tech Stack", status = "primary", solidHeader = TRUE,
                     tags$ul(
