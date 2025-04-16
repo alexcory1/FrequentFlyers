@@ -88,3 +88,10 @@ Our dashboard is mostly functional. The prediction model is made, but we are sti
 
 ## 2025-04-13: Add Models to Dashboard 
 Our model is currently saved to our github. It was made using XGBoost. It takes in user input of source airport, destination airport, and quarter of the year and will return a predicted ticket price for a flight. The prediction tab on our dashboard now has the input options available for the user to select. The model has also been added to our dashboard and gives an output given user input. 
+
+
+
+## 2025-04-20: Dashboard Peer Review
+The goal of our dashboard is provide price information for airline tickets. It can be used by travel agencies, travelers, or just curious minds. There are 4 tabs to our dashboard. The first tab is our home tab and contains all the relevant information about our dashboard. The second tab contains the map of all the routes to and from airports. It can be filtered by user input. The user can select a time period and an airport, after which the map will filter accordingly. The third tab includes all of our plots that we made showing various information and findings. The fourth and last tab contains the price prediction model. The user can input departure city, arrival city, and quarter of the year, and the model will output a predicted price. 
+
+
