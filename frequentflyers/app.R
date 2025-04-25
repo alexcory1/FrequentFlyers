@@ -100,24 +100,24 @@ ui <- dashboardPage(
               fluidRow(
                 box(width = 6, height = "auto", title = "👥 Who Can Use This?", status = "warning", solidHeader = TRUE,
                     tags$ul(
-                      tags$li("✈️ Travelers comparing price trends"),
-                      tags$li("📊 Airline and airport analysts"),
-                      tags$li("🧠 Data science students learning Shiny"),
-                      tags$li("🤓 Anyone interested in air travel data")
+                      tags$li("Travelers comparing price trends"),
+                      tags$li("Airline and airport analysts"),
+                      tags$li("Data science students"),
+                      tags$li("Trip Planners")
                     )
                 ),
                 
                 box(width = 6, height = "auto", title = "🔍 What You Can Explore (Our 8 Visuals)", status = "danger", solidHeader = TRUE,
                     tags$ul(
-                      tags$li("1️⃣📈", tags$strong(" Flight Fare Distribution"), " - Histogram of fares across all flights"),
-                      tags$li("2️⃣🟦", tags$strong(" Flights by Quarter & Year"), " - Stacked bar chart over time"),
-                      tags$li("3️⃣📊", tags$strong(" Fare vs Distance"), " - Scatter plot showing correlation"),
-                      tags$li("4️⃣📉", tags$strong(" Flight Price Trend Over Time"), " - Line chart with quarterly average fares"),
-                      tags$li("5️⃣🛫", tags$strong(" Busiest Airports by Flight Counts"), " Histogram in inbound and outbound flight count"),
-                      tags$li("6️⃣🛬", tags$strong(" Flight Route Map"), " - Interactive Leaflet map by year & airport"),
-                      tags$li("7️⃣🔄", tags$strong(" Total Flights by Airport"), " - Bar chart of inbound/outbound flights"),
-                      tags$li("8️⃣✈", tags$strong(" Chord Diagram"), " - Most frequent city-to-city connections"),
-                      tags$li("9️⃣", tags$strong("️ Top Airlines by Miles Flown"), " - Bar chart showing cumulative distance flown")
+                      tags$li(tags$strong(" Flight Fare Distribution"), " - Histogram of fares across all flights"),
+                      tags$li(tags$strong(" Flights by Quarter & Year"), " - Stacked bar chart over time"),
+                      tags$li(tags$strong(" Fare vs Distance"), " - Scatter plot showing correlation"),
+                      tags$li(tags$strong(" Flight Price Trend Over Time"), " - Line chart with quarterly average fares"),
+                      tags$li(tags$strong(" Busiest Airports by Flight Counts"), " Histogram with inbound and outbound flight count"),
+                      tags$li(tags$strong(" Flight Route Map"), " - Interactive Leaflet map by year & airport"),
+                      tags$li(tags$strong(" Total Flights by Airport"), " - Bar chart of inbound/outbound flights"),
+                      tags$li(tags$strong(" Chord Diagram"), " - Most frequent city-to-city connections"),
+                      tags$li(tags$strong("️ Top Airlines by Miles Flown"), " - Bar chart showing cumulative distance flown")
                     )
                 )
               ),
@@ -125,10 +125,10 @@ ui <- dashboardPage(
               fluidRow(
                 box(width = 12, height = "auto", title = "📦 Tech Stack", status = "primary", solidHeader = TRUE,
                     tags$ul(
-                      tags$li("🖥 R & Shiny – Core dashboard development"),
-                      tags$li("📈 Plotly – Interactive plots and visuals"),
-                      tags$li("🌍 Leaflet – Dynamic flight route mapping"),
-                      tags$li("🧠 Machine Learning – XGBoost & CatBoost for price prediction")
+                      tags$li("R & Shiny – Core dashboard development"),
+                      tags$li("Plotly – Interactive plots and visuals"),
+                      tags$li("Leaflet – Dynamic flight route mapping"),
+                      tags$li("Machine Learning – XGBoost & CatBoost for price prediction")
                     )
                 )
               ),
