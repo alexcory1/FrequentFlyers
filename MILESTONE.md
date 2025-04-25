@@ -1,6 +1,8 @@
 ## 2025-01-31 Team Formation Milestone 
   We chose the name Frequent Fliers because our dashboard displays flight information. We put off choosing a name until we had decided on our project idea so that we could tie the name to the project. Frequent Fliers is a term used to describe people who fly often, so they would be one of the main audience of our dashboard. 
 
+## 2025-02-07 Pick Data/Project Milestone 
+
 ## 2025-02-17: Acquire Data Milestone 
 ### Data Wrangling
   The datasets that we have include data about different airlines and ticket pricing. So far, we have created a map that visualizes the routes that flights take in the US with airports at the nodes. We have an additional table that contains airport codes, longitude and latitude, and other information about specific airports. This table has been joined with our other datasets to add to the information that we already have gathered. This was necessary to help build the map and will continue to be useful during our other modeling processes. We haven’t really encountered any serious roadblocks with the data. The only problem is that the data is not super current, but we are working with the data that we have. Another potential issue is the fact that our US routes dataset doesn’t have specific dates for the flights; it only has year and quarter. This will potentially make price prediction difficult for specific flights on specific days. 
@@ -97,4 +99,8 @@ Our model is currently saved to our github. It was made using XGBoost. It takes 
 ## 2025-04-20: Dashboard Peer Review
 The goal of our dashboard is provide price information for airline tickets. It can be used by travel agencies, travelers, or just curious minds. There are 4 tabs to our dashboard. The first tab is our home tab and contains all the relevant information about our dashboard. The second tab contains the map of all the routes to and from airports. It can be filtered by user input. The user can select a time period and an airport, after which the map will filter accordingly. The third tab includes all of our plots that we made showing various information and findings. The fourth and last tab contains the price prediction model. The user can input departure city, arrival city, and quarter of the year, and the model will output a predicted price. 
 
+
+
+## 2025-04-20: Finalize Dashboard Milestone
+This past week we have been readying our dashboard for the peer review by other teams. Our dashboard is largely done, so this just includes small tweaks to the look of the dashboard and making sure everything is running smoothly. There were small adjustments to the overall layout. One thing we did was combine the Home tab and the About tab since they were both displaying similar information. This improved the overall understanding of the dashboard features for users. 
 
