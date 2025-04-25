@@ -1,3 +1,6 @@
+## 2025-01-31 Team Formation Milestone 
+  We chose the name Frequent Fliers because our dashboard displays flight information. We put off choosing a name until we had decided on our project idea so that we could tie the name to the project. Frequent Fliers is a term used to describe people who fly often, so they would be one of the main audience of our dashboard. 
+
 ## 2025-02-17: Acquire Data Milestone 
 ### Data Wrangling
   The datasets that we have include data about different airlines and ticket pricing. So far, we have created a map that visualizes the routes that flights take in the US with airports at the nodes. We have an additional table that contains airport codes, longitude and latitude, and other information about specific airports. This table has been joined with our other datasets to add to the information that we already have gathered. This was necessary to help build the map and will continue to be useful during our other modeling processes. We haven’t really encountered any serious roadblocks with the data. The only problem is that the data is not super current, but we are working with the data that we have. Another potential issue is the fact that our US routes dataset doesn’t have specific dates for the flights; it only has year and quarter. This will potentially make price prediction difficult for specific flights on specific days. 
