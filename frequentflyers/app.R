@@ -42,8 +42,8 @@ ui <- dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
-      menuItem("Map", tabName = "map", icon = icon("map")),
-      menuItem("Plots", tabName = "plots", icon = icon("plane")),
+      menuItem("Flights Map", tabName = "map", icon = icon("map")),
+      menuItem("Trends & Analytics", tabName = "plots", icon = icon("plane")),
       menuItem("Price Prediction", tabName = "pricePrediction", icon = icon("dollar-sign"))
     )
   ),
