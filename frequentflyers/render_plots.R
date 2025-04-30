@@ -36,14 +36,6 @@ render_plots <- function(input, output,filtered_data) {
     plot_price_trend(price_trend_data(USflight_data))
   })
   
-  output$chord_plot <- renderPlot({
-    circos.clear()
-    plot_chord_diagram_routes(price_distribution_data(USflight_data), input$top_routes)
-  })
-  
-  output$price_heatmap <- renderPlotly({
-    plot_flight_price_heatmap(price_distribution_data(USflight_data))
-  })
   
   output$fare_by_carrier <- renderPlotly({
     plot_fare_by_carrier(price_distribution_data(USflight_data))

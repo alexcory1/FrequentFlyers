@@ -83,61 +83,6 @@ plot_price_trend <- function(data) {
            hovermode = "x")
 }
 
-#Chord diagram for popular votes
-plot_chord_diagram_routes <- function(data, top_n = 15) {
-  library(circlize)
-  circos.clear()
-  
-  
-  route_data <- data %>%
-    group_by(city1, city2) %>%
-    summarise(total_passengers = sum(passengers, na.rm = TRUE)) %>%
-    ungroup()
-  
-  
-  top_routes <- route_data %>%
-    arrange(desc(total_passengers)) %>%
-    head(top_n)
-  
-  
-  cities <- unique(c(top_routes$city1, top_routes$city2))
-  matrix_data <- matrix(0, nrow = length(cities), ncol = length(cities),
-                        dimnames = list(cities, cities))
-  
-  for (i in 1:nrow(top_routes)) {
-    city_a <- top_routes$city1[i]
-    city_b <- top_routes$city2[i]
-    matrix_data[city_a, city_b] <- top_routes$total_passengers[i]
-  }
-  
-  city_colors <- rand_color(length(cities), transparency = 0.3)
-  names(city_colors) <- cities
-  
- 
-  chordDiagram(matrix_data, grid.col = city_colors, transparency = 0.4,
-               directional = TRUE, direction.type = "arrows",
-               annotationTrack = "grid", preAllocateTracks = list(track.height = 0.1))
-  
-  
-  circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
-    sector.name <- get.cell.meta.data("sector.index")
-    cleaned.name <- gsub("\\s*\\(.*\\)", "", sector.name)
-    
-    x_pos <- mean(get.cell.meta.data("xlim"))
-    y_pos <- get.cell.meta.data("ylim")[1]
-    
-    circos.text(x = x_pos, 
-                y = y_pos,  
-                labels = cleaned.name, 
-                facing = "clockwise",
-                niceFacing = TRUE, 
-                adj = c(0, 0.5), 
-                cex = 0.7)
-  }, bg.border = NA)
-  
-  gg <- ggplot() + theme_void()
-  ggplotly(gg)
-}
 
 plot_fare_by_carrier <- function(data) {
   plot_ly(data, x = ~carrier_lg, y = ~fare, 
